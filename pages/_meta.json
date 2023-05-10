@@ -1,7 +1,6 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
+  "index": "Home",
+  "walkthrough": "Walkthrough",
   "about": {
     "title": "About",
     "type": "page"
