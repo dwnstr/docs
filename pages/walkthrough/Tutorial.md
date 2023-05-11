@@ -8,7 +8,7 @@ description: >-
 
 ## Intro
 
-Hello! :wave:
+Hello! 👋
 
 Welcome to the guide/documentation/walkthrough on how to create Non-ELS based emergency vehicles for GTA and FiveM.&#x20;
 
