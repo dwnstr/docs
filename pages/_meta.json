@@ -1,6 +1,21 @@
 {
   "index": "Home",
-  "walkthrough": "Walkthrough",
+  "tutorial": "Tutorial",
+  "data-files": {
+    "title": "Data Files",
+    "type": "separator"
+  },
+
+  "siren-tool": {
+    "title": "Siren Tool",
+    "type": "separator"
+  },
+  
+  "ulc": {
+    "title": "ULC",
+    "type": "separator"
+  },
+
   "about": {
     "title": "About",
     "type": "page"
