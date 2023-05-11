@@ -13,6 +13,14 @@ const config: DocsThemeConfig = {
   footer: {
     text: 'Nextra Docs Template',
   },
+    useNextSeoProps() {
+      return {
+        titleTemplate: 'Dawnstar Docs - %s'
+      }
+    }
 }
 
-export default config
+
+
+export default config 
+
