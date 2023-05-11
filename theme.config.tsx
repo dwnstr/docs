@@ -15,7 +15,7 @@ const config: DocsThemeConfig = {
   },
     useNextSeoProps() {
       return {
-        titleTemplate: 'Dawnstar Docs - %s'
+        titleTemplate: '%s - Dawnstar Docs'
       }
     }
 }
