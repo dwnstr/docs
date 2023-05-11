@@ -11,7 +11,6 @@
   "handling": "handling.meta",
   "vehicles": "vehicles.meta",
 
-
   "siren-tool": {
     "title": "🚨Siren Tool",
     "type": "separator"
@@ -23,7 +22,6 @@
     "newWindow": true
   },
   
-
   "ulc": {
     "title": "🎛ULC",
     "type": "separator"
@@ -37,7 +35,6 @@
     "newWindow": true
   },
 
-  
   "about": {
     "title": "About",
     "type": "page"

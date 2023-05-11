@@ -1,7 +1,5 @@
 # Stage Controls
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
-
 ## What are Stage Controls?
 
 Stage Controls, or "Buttons" as they are referenced in the code, are the bread and butter of ULC. They enable you to provide the player with key-bindings that will interact directly with vehicle lighting extras in real time.&#x20;
@@ -48,8 +46,6 @@ The string will always be rendered in all-caps on the UI.
 ```lua
 label = 'STAGE 2',
 ```
-
-![](<../../.gitbook/assets/image (1) (1).png>)
 
 #### key
 
