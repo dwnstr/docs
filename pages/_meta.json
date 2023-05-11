@@ -3,20 +3,20 @@
   "tutorial": "Tutorial",
 
   "data-files": {
-    "title": "Data Files",
+    "title": "📄Data Files ",
     "type": "separator"
   },
-  "": "",
-  "": "",
-  "": "",
-  "": "",
+  "carcols": "carcols.meta",
+  "carvariations": "carvariations.meta",
+  "handling": "handling.meta",
+  "vehicles": "vehicles.meta",
 
 
   "siren-tool": {
-    "title": "Siren Tool",
+    "title": "🚨Siren Tool",
     "type": "separator"
   },
-  "what-is-st": "What is Siren Tool?",
+  "intro": "What is Siren Tool?",
   "get-siren-tool": {
     "title": "Get Siren Tool! ↗",
     "href": "https://www.dwnstr.com/sirentool/",
@@ -25,7 +25,7 @@
   
 
   "ulc": {
-    "title": "ULC",
+    "title": "🎛ULC",
     "type": "separator"
   },
   "getting-started": "Getting Started",
