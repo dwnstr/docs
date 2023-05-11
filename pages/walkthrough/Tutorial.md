@@ -1,11 +1,5 @@
----
-description: >-
-  A full walkthrough of a Non-ELS vehicle workflow. Includes Blender, Siren
-  Tool, ZModeler3, and ULC.
----
-
-# ⏩ Walkthrough
-
+# Walkthrough
+A full walkthrough of a Non-ELS vehicle workflow. Includes Blender, Siren Tool, ZModeler3, and ULC.
 ## Intro
 
 Hello! 👋
