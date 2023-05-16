@@ -114,3 +114,108 @@ Follow the steps below!
   Restart ULC and test it out and then repeat for your other vehicles!
 
 </Steps>
+
+## Configuring a vehicle pack
+
+If you have a resource with multiple vehicles in it that all use the same
+ULC configuration, you can use a single `ulc.lua` file for all of them.
+
+Simply include all of the model names in the `names` field of the `ulc.lua` file.
+
+```lua
+  names = {"pd4","pd5", "pd6"},
+```
+
+If there are vehicles in the resource that use a different configuration
+you can create an additional configuration object within the same 
+`ulc.lua` file.
+
+<details>
+  <summary>
+    Multi-Config ulc.lua Example
+  </summary>
+  ```lua
+    return {names = {"sp20", "pd20"},
+      steadyBurnConfig = {
+          forceOn = false,
+          useTime = false,
+          disableWithLights = false,
+          sbExtras = {}
+      },
+      parkConfig = {
+          usePark = true,
+          useSync = true,
+          syncWith = {'sp20', 'sp18chrg'},
+          pExtras = {10, 11},
+          dExtras = {}
+      },
+      hornConfig = {
+          useHorn = true,
+          hornExtras = {12}
+      },
+      brakeConfig = {
+          useBrakes = false,
+          speedThreshold = 3,
+          brakeExtras = {}
+      },
+      -- example button
+      -- {label = 'STAGE 2', key = 5, extra = 8},
+        buttons = {
+          {label = 'stage 2', key = 5, extra = 8, offExtras = {10, 11}},
+            {label = 'TA', key = 6, extra = 9, offExtras = {}},
+            {label = 'AUX1', key = 7, extra = 10, offExtras = {}},
+            {label = 'AUX 2',key = 8,extra = 11, offExtras = {}},
+            {label = 'SCENE',key = 9,extra = 12, offExtras = {}},
+        }
+    },
+    {names = {'pdram'},
+      steadyBurnConfig = {
+            forceOn = false,
+            useTime = false,
+            disableWithLights = false,
+            sbExtras = {}
+        },
+        parkConfig = {
+            usePark = true,
+            useSync = true,
+            syncWith = {'sp20', 'sp18chrg'},
+            pExtras = {10, 11},
+            dExtras = {}
+        },
+        hornConfig = {
+            useHorn = true,
+            hornExtras = {12}
+        },
+        brakeConfig = {
+            useBrakes = false,
+            speedThreshold = 3,
+            brakeExtras = {}
+        },
+      -- example button
+      -- {label = 'STAGE 2', key = 5, extra = 8},
+        buttons = {
+          {label = 'stage 2', key = 5, extra = 8, offExtras = {10, 11}},
+            {label = 'TA', key = 6, extra = 9, offExtras = {}},
+            {label = 'AUX1', key = 7, extra = 10, offExtras = {}},
+            {label = 'AUX 2',key = 8,extra = 11, offExtras = {}},
+            {label = 'SCENE',key = 9,extra = 12, offExtras = {}},
+        }
+    }
+    ```
+</details>
+
+## Creating Non-ELS Vehicles for ULC
+
+Vehicle developers who are creating vehicles compatible with ULC can provide a local configuration file within their vehicle resources for use by users.
+
+By providing a configuration file your vehicle will be pre-configured for all users who use it. Users will be able to simply plug-and-play your vehicle with ULC functionality.
+
+Follow steps 1 - 5 above to learn how to create a ulc.lua file.
+
+### Extras with Sirens
+
+The concept of nesting Sirens into an Extra is critical to proper usage of ULC. Most of the features of ULC require sirens to be contained within extras.
+
+All you have to do to set this up is parent your Sirens to an Extra once they are compounded. Your extra can have any other parts also attached. I.E you could have a divider to block the emissives behind the emissives you want to show, such as in the case of a traffic advisor.
+
+For detailed info about each feature and their config values see the below pages.
