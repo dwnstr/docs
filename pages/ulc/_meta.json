@@ -1,0 +1,10 @@
+{
+  "overview": "Getting Started",
+  "config": "Configuration",
+  "in-game-usage": "In-Game Usage",
+  "ulc_download": {
+    "title": "Download ULC ↗",
+    "href": "https://github.com/Flohhhhh/ultimate-lighting-controller/releases",
+    "newWindow": true
+  }
+}

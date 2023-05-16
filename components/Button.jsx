@@ -14,7 +14,7 @@ const Button = ({ label, href, onClick }) => {
           console.log("No action");
         }
       }}
-      className="nx-border nx-border-white/50 nx-min-w-32 nx-w-fit nx-min-h-8 nx-px-4 nx-py-2 nx-bg-blue-600 nx-rounded-md nx-font-medium"
+      className="nx-border nx-border-white/50 nx-min-w-32 nx-w-fit nx-min-h-8 nx-px-4 nx-py-1 nx-bg-blue-600 nx-rounded-md nx-font-medium"
     >
       {label}
     </button>

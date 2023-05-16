@@ -2,37 +2,30 @@
   "index": "Home",
   "tutorial": "Tutorial",
 
-  "data-files": {
-    "title": "📄Data Files ",
+  "sep1": {
     "type": "separator"
   },
-  "carcols": "carcols.meta",
-  "carvariations": "carvariations.meta",
-  "handling": "handling.meta",
-  "vehicles": "vehicles.meta",
+
+  "data-files": {
+    "title": "📄 Data Files "
+  },
+
+  "sep2": {
+    "type": "separator"
+  },
 
   "siren-tool": {
-    "title": "🚨Siren Tool",
+    "title": "🚨 Siren Tool",
     "type": "separator"
   },
-  "intro": "What is Siren Tool?",
-  "get-siren-tool": {
-    "title": "Get Siren Tool! ↗",
-    "href": "https://www.dwnstr.com/sirentool/",
-    "newWindow": true
+
+  "sep3": {
+    "type": "separator"
   },
-  
+
   "ulc": {
-    "title": "🎛ULC",
+    "title": "🎛 ULC",
     "type": "separator"
-  },
-  "getting-started": "Getting Started",
-  "config": "Configuration",
-  "in-game-usage": "In-Game Usage",
-  "ulc_download": {
-    "title": "Download ULC ↗",
-    "href": "https://github.com/Flohhhhh/ultimate-lighting-controller/releases",
-    "newWindow": true
   },
 
   "about": {
