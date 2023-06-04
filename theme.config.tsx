@@ -4,12 +4,12 @@ import { DocsThemeConfig } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
   logo: <span>Non-ELS Documentation</span>,
   project: {
-    link: 'https://github.com/shuding/nextra-docs-template',
+    link: 'https://github.com/dwnstr/docs',
   },
   chat: {
-    link: 'https://discord.com',
+    link: 'https://discord.gg/dwnstr-fivem',
   },
-  docsRepositoryBase: 'https://github.com/shuding/nextra-docs-template',
+  docsRepositoryBase: 'https://github.com/dwnstr/docs',
   footer: {
     text: 'Nextra Docs Template',
   },

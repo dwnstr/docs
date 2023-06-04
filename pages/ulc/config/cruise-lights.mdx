@@ -1,0 +1,65 @@
+import Video from '../../../components/Video'
+
+# Cruise Lights
+
+The smart cruise lights feature allows you to use ULC to specify extras that will be force enabled either:
+- Always
+- Based on time of day
+
+Cruise lights are designed to increase visibility while not responding to scenes. There are some special use cases for cruise lights as well.
+For example, the Connecticut state police does not have liveries on their vehicles. Instead, they use cruise lights to identify the vehicles as police vehicles.
+
+## Real World Example
+<Video url="https://www.youtube.com/watch?v=dzB75QGqkWs"/>
+
+## How to Create Cruise Lights
+
+To create cruise lights simply create an extra that is just emissive mesh. Make sure the emissives are dimmed down instead of full brightness!
+
+Cruise lights don't have to be sirens. They can just be plain emissive meshes that aren't scaled down.
+However, if you want environment lighting, or you want the steady burns to only show when the emergency lights are activated, then you should make these a siren.
+
+## Global Settings
+These settings are found in the ``config.lua`` file and affect the whole server.
+### ``nightStartHour``
+This value specifies the hour of the day when the cruise lights will activate.
+```lua
+nightStartHour = 18,
+```
+### ``nightEndHour``
+This value specifies the hour of the day when the cruise lights will deactivate.
+```lua  
+nightEndHour = 6,
+```
+### ``delay``
+This value specifies the delay between checks for the cruise lights.
+```lua
+delay = 10,
+```
+
+## Per-Vehicle Settings
+These settings are found in ``ulc.lua`` and only effect the specified vehicle(s).
+
+### ``forceOn``
+This value specifies whether the cruise lights should be forced on.
+If set to true, this will override the ``useTime`` setting and cruise lights
+will be enabled at all times.
+```lua
+forceOn = false,
+```
+### ``useTime``
+This value specifies whether the cruise lights should be enabled based on the time of day.
+If set to true, cruise lights will be force enabled at night only.
+```lua
+useTime = true,
+```
+### ``disableWithLights``
+This value specifies whether the cruise lights should be disabled when the main lights are activated.
+```lua
+disableWithLights = false,
+```
+### ``sbExtras``
+This value specifies which extras should be force enabled as cruise lights.
+```lua
+sbExtras = {1, 2}
+```
