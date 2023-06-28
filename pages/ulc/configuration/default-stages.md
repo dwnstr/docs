@@ -10,9 +10,9 @@ description: >-
 
 Default stages allows you to specify stages created as [stage buttons](stage-controls.md) that will either be enabled or disabled when the lighting is activated on the vehicle.
 
-{% embed url="https://medal.tv/games/gta-v/clips/XYMFe22wM5bvB/un35AqpHzGNk?invite=cr-MSxrY0MsMTc0MDk3ODg4LA" %}
+<!-- {% embed url="https://medal.tv/games/gta-v/clips/XYMFe22wM5bvB/un35AqpHzGNk?invite=cr-MSxrY0MsMTc0MDk3ODg4LA" %} -->
 
-As you can see in the video, "STAGE 2" is being manually disabled, but always turns on when vehicle lighting is activated!
+<!-- As you can see in the video, "STAGE 2" is being manually disabled, but always turns on when vehicle lighting is activated! -->
 
 ## Example Usage
 
