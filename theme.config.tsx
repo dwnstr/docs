@@ -9,7 +9,7 @@ const config: DocsThemeConfig = {
   chat: {
     link: 'https://discord.gg/dawnstar-fivem-603591936372244501',
   },
-  docsRepositoryBase: 'https://github.com/dwnstr/docs',
+  docsRepositoryBase: 'https://github.com/dwnstr/docs/tree/main',
   footer: {
     text: 'MIT 2021 © Dawnstar Entertainment',
   },
