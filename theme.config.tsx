@@ -2,16 +2,16 @@ import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
-  logo: <span>Non-ELS Documentation</span>,
+  logo: <h1>Non-ELS Documentation</h1>,
   project: {
     link: 'https://github.com/dwnstr/docs',
   },
   chat: {
-    link: 'https://discord.gg/dwnstr-fivem',
+    link: 'https://discord.gg/dawnstar-fivem-603591936372244501',
   },
   docsRepositoryBase: 'https://github.com/dwnstr/docs',
   footer: {
-    text: 'Nextra Docs Template',
+    text: 'MIT 2021 © Dawnstar Entertainment',
   },
   useNextSeoProps() {
     return {

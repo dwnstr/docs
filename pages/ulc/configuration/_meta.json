@@ -2,5 +2,9 @@
   "stage-controls": "Stage Controls",
   "default-stages": "Default Stages",
   "cruise-lights": "Cruise Lights",
-  "park-patterns-sync": "Park Patterns & Sync"
+  "park-patterns-sync": "Park Patterns & Sync",
+  "brake-extras": "Brake Extras",
+  "door-extras": "Door Extras",
+  "horn-extras": "Horn Extras",
+  "reverse-extras": "Reverse Extras"
 }
