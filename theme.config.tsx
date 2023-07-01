@@ -1,4 +1,6 @@
 import React from 'react'
+import { useRouter } from 'next/router'
+import { useConfig } from 'nextra-theme-docs'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
@@ -17,6 +19,24 @@ const config: DocsThemeConfig = {
     return {
       titleTemplate: '%s - Dawnstar Docs'
     }
+  },
+  head: () => {
+    const { asPath, defaultLocale, locale } = useRouter()
+    const { frontMatter } = useConfig()
+    const url =
+      'https://docs.dwnstr.com' +
+      (defaultLocale === locale ? asPath : `/${locale}${asPath}`)
+ 
+    return (
+      <>
+        <meta property="og:url" content={url} />
+        <meta property="og:title" content={frontMatter.title || 'Dawnstar Docs'} />
+        <meta
+          property="og:description"
+          content={frontMatter.description || 'Open-source docs for FiveM and GTA vehicle developers.'}
+        />
+      </>
+    )
   }
 }
 
