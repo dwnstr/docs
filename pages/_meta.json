@@ -2,7 +2,8 @@
   "index": "Home",
 
   "tutorials": {
-    "title": "📄 Tutorials "
+    "title": "📄 Tutorials ",
+    "type": "separator"
   },
 
   "sep1": {
@@ -11,7 +12,8 @@
   },
 
   "data-files": {
-    "title": "📄 Data Files "
+    "title": "📄 Data Files ",
+    "type": "separator"
   },
 
   "sep2": {
