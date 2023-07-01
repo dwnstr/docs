@@ -11,7 +11,7 @@ const config: DocsThemeConfig = {
   },
   docsRepositoryBase: 'https://github.com/dwnstr/docs/tree/main',
   footer: {
-    text: 'MIT 2021 © Dawnstar Entertainment',
+    text: 'Organized with ❤️ by Dawnstar',
   },
   useNextSeoProps() {
     return {

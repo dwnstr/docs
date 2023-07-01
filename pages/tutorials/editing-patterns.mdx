@@ -1,0 +1,67 @@
+import PageCard from '../../components/PageCard'
+
+# How to edit patterns
+
+If you are looking to edit lighting patterns on a Non-ELS vehicle created by someone else, you will need a basic understanding of how Non-ELS works,
+and the limitations on editing patterns without having access to edit the model itself.
+
+Start by reading the What is Non-ELS tutorial linked below, and then come back here.
+
+<div className="nx-grid lg:nx-grid-cols-2 nx-gap-4 nx-mt-4">
+  <PageCard 
+    name="What is Non-ELS?"  link="/tutorials/what-is-non-els"
+    description="Learn about what Non-ELS is, and how it works."
+  />
+</div>
+
+## Editing patterns
+
+All you need to do to edit patterns is open the carcols.meta file and change the sequencers on the sirens you want to modify.
+The challenge is that you need to know which emissive meshes are parented to which sirens in order to effectively create a new pattern.
+
+There are a few tricks you can use to help you figure out which emissive meshes are parented to which sirens.
+
+### 1. Open the model in OpenIV
+
+By opening the model in OpenIV and viewing the vertices, you can see sirens/dummies represented by single verticies. Sometimes it can be
+hard to identify sirens using this method, but in some cases it can be very helpful.
+
+<img
+  alt=""
+  src="https://media.discordapp.net/attachments/604451673288474624/1123375607930175659/image.png"
+  className="nx-rounded-lg nx-mt-6"
+/>
+
+Another thing to look for in OpenIV is if any sirens are part of an extra. If they are, you can get a good idea of which modules the siren
+affects by testing what modules the extra affects.
+
+<img
+  alt=""
+  src="https://media.discordapp.net/attachments/604451673288474624/1123375643153932338/image.png"
+  className="nx-rounded-lg nx-mt-6"
+/>
+
+### 2. Single out sirens
+
+Once you have tried to gather any info you can from OpenIV, you can move on to single out sirens in-game. One-by-one set the sequencer on each siren to be
+a solid pattern (``4294967295``) then look in game to identify the emissive meshes affected.
+
+Make sure to note this down somewhere for later!
+
+### 3. Create your new pattern
+
+Once you have figured out which emissive meshes are affected by which sirens, you can create your new pattern.
+
+Depending on how many sirens the creator of the vehicle model used, you will have less or more freedom to create your own patterns. For example, if all of the
+lights are parented to only 2 sirens, you will be heavily restricted.
+
+Siren Tool can be very helpful at this step, as you can use it to properly lay out your sirens according to the emissive meshes you identified earlier.
+
+Check out Siren Tool below!
+
+<div className="nx-grid lg:nx-grid-cols-2 nx-gap-4 nx-mt-4">
+  <PageCard 
+    name="Siren Tool"  link="/siren-tool/intro"
+    description="Learn about Siren Tool, a tool for visually generating sequencers."
+  />
+</div>

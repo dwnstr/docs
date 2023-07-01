@@ -1,8 +1,12 @@
 {
   "index": "Home",
-  "tutorial": "Tutorial",
+
+  "tutorials": {
+    "title": "📄 Tutorials "
+  },
 
   "sep1": {
+    "title": "",
     "type": "separator"
   },
 
@@ -11,6 +15,7 @@
   },
 
   "sep2": {
+    "title": "",
     "type": "separator"
   },
 
@@ -20,6 +25,7 @@
   },
 
   "sep3": {
+    "title": "",
     "type": "separator"
   },
 
