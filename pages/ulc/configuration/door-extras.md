@@ -26,7 +26,4 @@ If I wanted to disable extras 4 and 5 whenever a door is open, I would set disab
 </strong>    trunk = {enable = {}, disable = {}},
 },
 </code></pre>
-<!-- 
-{% hint style="info" %}
-Door extras are not state aware
-{% endhint %} -->
+<!-- Door extras are not state aware -->

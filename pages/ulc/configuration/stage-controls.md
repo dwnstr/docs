@@ -2,17 +2,17 @@
 
 ## What are Stage Controls?
 
-Stage Controls, or "Buttons" as they are referenced in the code, are the bread and butter of ULC. They enable you to provide the player with key-bindings that will interact directly with vehicle lighting extras in real time.&#x20;
+Stage Controls, or "Buttons" as they are referenced in the code, are the bread and butter of ULC. They enable you to provide the player with key-bindings that will interact directly with vehicle lighting extras in real time.
 
 Only the stage buttons you define will appear on screen, if none are defined the ULC ui will be hidden.
 
 ## Example Usage
 
-* Traditional Stage Lighting&#x20;
-* Traffic Advisors
-* Flood/Scene/Alley Lighting
-* Alternative Patterns
-* Anything else!
+- Traditional Stage Lighting
+- Traffic Advisors
+- Flood/Scene/Alley Lighting
+- Alternative Patterns
+- Anything else!
 
 ## Button Setup Guide
 

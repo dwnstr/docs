@@ -8,7 +8,7 @@ Simply create a stage extra as usual, and assign it in the config.
 Brake extras are state aware!
 {% endhint %} -->
 
-**Vehicle Horn Extras Config**
+## Vehicle Horn Extras Config
 
 ```lua
 hornConfig = {

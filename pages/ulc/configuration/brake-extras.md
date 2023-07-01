@@ -2,7 +2,7 @@
 
 Brake extras allow you to enable extras while the vehicle is braking. There is a speed threshold variable that will make the effect only activate at higher speeds if you prefer.3
 
-**How to Create Brake Patterns**
+## How to Create Brake Patterns
 
 The primary use for this feature is adding functional brake lights as extras.
 
@@ -12,7 +12,7 @@ An alternative use is to add a faster or brighter pattern that will show only wh
 
 <!-- brake extras are not state aware -->
 
-**Brake Pattern Vehicle Config**
+## Brake Pattern Vehicle Config
 
 ```lua
 brakeConfig = {

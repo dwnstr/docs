@@ -38,7 +38,7 @@ I want my front lighting to always be enabled when the lights are activated. I w
 }
 </code></pre>
 
-Now it will be as if the player pressed NUM 1 to activate the stage every time the lights turn on resulting in the stage always being active when lights are first activated.
+Now it will be as if the player pressed ``NUM1`` to activate the stage every time the lights turn on resulting in the stage always being active when lights are first activated.
 
 ## Conflicts
 
