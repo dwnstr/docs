@@ -69,7 +69,6 @@ Be sure to set the delta value in both the rotation section and the flashiness s
     <direction value="false" />
     <syncToBpm value="true" />
   </flashiness>
-</Item>
 ...
 ```
 ### Sequencers
@@ -109,7 +108,7 @@ The decimal value is what we will use in ``carcols.meta``. Be sure to set the se
     <direction value="false" />
     <syncToBpm value="true" />
   </flashiness>
-</Item>
+...
 ```
 
 
@@ -139,21 +138,14 @@ Coronas are the orbs of light that appear on the vehicle when the siren is on. Y
 ```xml {3, 4, 5} filename="carcols.meta"
 ...
 <corona>
-  <intensity value="0.00000001" />
-  <size value="0.10000000" />
-  <pull value="0.15000000" />
+  <intensity value="0.00000001"/>
+  <size value="0.00000000"/>
+  <pull value="0.15000000"/>
+  <faceCamera value="false"/>
 </corona>
 ...
 ```
 Most people choose to entirely hide the coronas by using values similar to the ones above.
-
-### Speed Value
-This section needs contributors! 
-Click ``Edit this page`` on the right or learn other ways to contribute [here!](/#you-can-contribute)
-
-### Light Groups
-This section needs contributors! 
-Click ``Edit this page`` on the right or learn other ways to contribute [here!](/#you-can-contribute)
 
 ### Colors
 
@@ -161,8 +153,7 @@ Click ``Edit this page`` on the right or learn other ways to contribute [here!](
 <color value="0xFFFF0000">
 ```
 
-**Most Used Colors**
-
+Most Used Colors
 | Color Name | Hex          | ARGB |
 | ---------- | ------------ | ---- |
 | Red        | `0xFFFF0000` |      |
@@ -173,8 +164,7 @@ Click ``Edit this page`` on the right or learn other ways to contribute [here!](
 | Green      |              |      |
 | Purple     |              |      |
 
-**Standard Colors**
-
+Standard Colors
 | Color Name     | Hex           | ARGB               |
 | -------------- | ------------- | ------------------ |
 | BlackGraphite  | `0xFF0F0F0F`  | 255, 15, 15, 15    |
@@ -196,6 +186,31 @@ Data gathered by Zero parsed by, HairyMineFart, and Organized by Dawnstar
 
 Non-standard colors were excluded, but could give different results than the one above. If you want to try other values you can 
 [find the full list of colors here](https://www.se7ensins.com/forums/threads/vehicle-colors.1169166/)
+
+### Scale Factor
+Scale factor determines by what factor/multiple the emissive meshes parented to the Siren will scale up.
+
+If the mesh was scaled down to 0.01 in ZModeler, it needs to be scaled up by 100 in carcols to work properly in-game. You can technically use any value
+if you want to do the math, but below are some of the most commonly used values.
+
+| Mesh Scale | Scale Factor |
+| ---------- | ------------ |
+| ~~0.1~~    | ~~10~~       |
+| 0.01       | 100          |
+| 0.001      | 1000         |
+
+<Callout type="info">
+  It is recommended to use a value smaller than 0.1 to hide the emissive mesh more effectively while scaled down.
+</Callout>
+
+### Speed Value
+This section needs contributors! 
+[Edit this page](https://github.com/dwnstr/docs/tree/main/pages/data-files/carcols.mdx) or learn [other ways to contribute](/#you-can-contribute)!
+
+### Light Groups
+This section needs contributors! 
+[Edit this page](https://github.com/dwnstr/docs/tree/main/pages/data-files/carcols.mdx) or learn [other ways to contribute](/#you-can-contribute)!
+
 
 ## Environment Lighting
 
