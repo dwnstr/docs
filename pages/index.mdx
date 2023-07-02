@@ -1,10 +1,16 @@
+import Image from 'next/image';
 import Video from '../components/Video.jsx';
 import { Callout } from 'nextra-theme-docs'
 
 export const meta = {
   title: 'Home',
   description: 'Welcome to our GTA V and FiveM Documentation for vehicle developers!',
+  image: '../public/banner.jpg',
 }
+
+<div className="nx-aspect-[4/1] nx-w-full nx-rounded-lg nx-overflow-hidden nx-flex nx-justify-center nx-items-center nx-my-4">
+  <Image src="/banner.png" alt="Banner" width="1000" height="300" className="nx-object-cover"/>
+</div>
 
 # Home
 

@@ -3,8 +3,13 @@ import { useRouter } from 'next/router'
 import { useConfig } from 'nextra-theme-docs'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 
+import Image from 'next/image'
+
 const config: DocsThemeConfig = {
-  logo: <h1>Non-ELS Documentation</h1>,
+  logo: <div className="nx-flex nx-gap-2 nx-items-center">
+    <Image alt="logo" src="/logo.png" width="28" height="28" />
+    <h1 className="nx-font-bold nx-text-2xl">Docs</h1>
+  </div>,
   project: {
     link: 'https://github.com/dwnstr/docs',
   },

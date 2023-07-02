@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes'
 export default function MyApp({Component, pageProps}) {
 
     return(
-        <div className={``}>
+        <div className="">
             <Component {...pageProps} />
         </div>
     )
