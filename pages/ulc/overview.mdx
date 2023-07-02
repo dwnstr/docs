@@ -5,6 +5,7 @@ description: Learn more about ULC and how to get started with it.
 
 import Button from '../../components/Button'
 import Video from '../../components/Video'
+import PageCard from '../../components/PageCard'
 import { Steps } from 'nextra-theme-docs'
 import { Callout } from 'nextra-theme-docs'
 
@@ -66,13 +67,51 @@ It's designed to be simple, customizable and easy to setup.
   </Callout>
 
   #### View the full guide
-  If you want to learn more about ULC, you can view the full guide [here](/docs/guide).
+  If you want to learn more about ULC, you can view the full guide below.
 
-  {/* TODO configuration page card here */}
+  <div className="nx-mt-4">
+    <PageCard 
+      name="ULC Configuration"  link="/ulc/configuration"
+      description="Learn how to configure ULC."
+    />
+  </div>
 
 </Steps>
 
 ## Learn More about ULC
 Exlpore the topics below to get familiar with how ULC works, and how to get the most out of it.
 
-{/* TODO configuration page cards here */}
+<div className="nx-grid lg:nx-grid-cols-2 nx-grid-rows-2 nx-gap-4 nx-mt-4">
+  <PageCard 
+    name="Stage Controls"  link="/ulc/configuration/stage-controls"
+    description="Create buttons to control lighting stages."
+  />
+  <PageCard 
+    name="Default Stages"  link="/ulc/configuration/default-stages"
+    description="Automatically set lighting configuration when lights are activated."
+  />
+  <PageCard 
+    name="Cruise Lights"  link="/ulc/configuration/cruise-lights"
+    description="Configure smart cruise lights/steady burns that run all the time, or based on time of day."
+  />
+  <PageCard 
+    name="Park Patterns"  link="/ulc/configuration/park-patterns-sync"
+    description="Change lighting when the vehicle is stopped, and sync with other vehicles."
+  />
+  <PageCard 
+    name="Brake Extras" link="/ulc/configuration/brake-extras"
+    description="Setup brake extras that turn on when the vehicle is braking or stopped."
+  />
+  <PageCard 
+    name="Door Extras" link="/ulc/configuration/door-extras"
+    description="Show or hide extras when doors open and close."
+  />
+  <PageCard
+    name="Horn Extras" link="/ulc/configuration/horn-extras"
+    description="Enable an extra when the horn is pressed."
+  />
+  <PageCard 
+    name="Reverse Extras" link="/ulc/configuration/reverse-extras"
+    description="Enable an extra while the vehicle is in reverse."
+  />
+</div>
