@@ -24,11 +24,11 @@ export default function MyApp({Component, pageProps}) {
                 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png"/>
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
                 <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
-                <meta name="msapplication-TileColor" content="#ffffff"/>
+                <meta name="msapplication-TileColor" content="#616AA2"/>
                 <meta name="msapplication-TileImage" content="/favicon-144x144.png"/>
                 <meta name="msapplication-config" content="/browserconfig.xml"/>
                 <link rel="manifest" href="/manifest.json"/>
-                <meta name="theme-color" content="#ffffff"/>
+                <meta name="theme-color" content="#616AA2"/>
             </Head>
             <Component {...pageProps} />
             <Analytics/>
