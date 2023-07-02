@@ -3,37 +3,28 @@ title: carcols.meta
 description: Details about the carcols.meta file for FiveM and GTA vehicle developers.
 ---
 
+import { Callout } from 'nextra-theme-docs'
+import PageCard from '../../components/PageCard'
+
 # carcols.meta
 
-## Siren Sequencers
+## Overview
 
-### Overview
+``carcols.meta`` is an xml file that contains lighting configurations for vehicles. It defines headlights, tail lights, and emergency lights.
 
-Siren Sequencers are decimal values that represent 32-bit binary strings. The sequencers are converted to binary and used by emergency vehicles to represent the pattern of their flashing lights.
+We will focus on how to configure emergency lights using sirens as well as how to set up modkits. If you're looking for details about every value in the file, 
+check out the [the GTAMods Wiki.](https://gtamods.com/wiki/Main\_Page)
 
-The patterns are expressed by using each digit of the binary value, one for each of 32 "ticks" (similar to frames) as an on or off value, and using a BPM value to determine the length of each tick.
+## Siren Walkthrough
 
-The sequencer value in Carcols.meta is represented as a decimal value, but a decimal value is unreadable as a pattern to us mere humans, there for we must construct them in binary, and convert them for use.
+Below are the more significant values in ``carcols.meta`` that are used to configure emergency lights.
 
-You can use a converter such as this one to accomplish this. https://www.rapidtables.com/convert/number/binary-to-decimal.html
+### Delta/Rotation
 
-### Sequencer Example
-
-Binary Sequence: 10101010101010101010101010101010
-
-Decimal Value from Sequence: 2863311530
-
-### Ways to Create Sequencers
-
-There are 2 common methods of creating sequencers for patterns.
-
-* Using [Siren Tool](https://dwnstr.com/sirentool)
-* Torture (Straining your eyes in notepad)
-
-## Siren Deltas
-
-Siren deltas determine the rotation of the emissive mesh, and the environment lighting.
-
+Siren deltas determine the rotation of the emissive mesh, and the environment lighting. 
+```xml filename="carcols.meta"
+<delta value="2.35619449">
+```
 There are 8 commonly used delta values.
 
 | Direction   | Side      | Degrees | Delta       |
@@ -47,55 +38,128 @@ There are 8 commonly used delta values.
 | Back Left   | Driver    | 135     | 2.35619449  |
 | Front Left  | Driver    | 45      | 0.78539816  |
 
-_Delta Values Research from "EX.1" was originally found by Glitch Gamer on LCPDFR_
-
-Pay attention to the fact that driver side is actually left and passenger side is actually right
+{/* TODO add credit component */}
+Values originally found by Glitch Gamer on LCPDFR
 
 ![](https://codahosted.io/docs/IEZ3CWmYBK/blobs/bl-7F9l4\_3ls4/4b5976cc8ed838dbf79a66e640e1ca82b9c85c5f254918fbd671f7a3c6e37d6a67a62cd4b65df69ee90dded72920d5a4f6f4fb32fd7580a2f6646da4a97e8d128f9ecc13d360849ef9f718fd025d108181debe018954bb28c04d53059dac3e154a0ede1b)
 
-_Lightbar Featured in example "EX.2" is a "42" Code 3 Pursuit, Top View" taken from_ [_https://www.code3esg.com/us/en/products/Lightbars/dual-level/Pursuit_](https://www.code3esg.com/us/en/products/Lightbars/dual-level/Pursuit)
+<Callout type="info">
+  Notice that driver side is actually left, and passenger side is actually right
+</Callout>
 
-![](https://codahosted.io/docs/IEZ3CWmYBK/blobs/bl-Uy1Gr9c8qa/bc5fd14e9657a648a3a8fb084d88a338f8ffc357fa24bb624d5d9119a13a3c885db963b646d56274ee83c0e0179a99aac822c3e87db51fae210e604cb8ac3a708755c4948d14405ce9c2a03d554defc9a97a40c96791ffc0772b9f7db943552647f6d6cf)
+Be sure to set the delta value in both the rotation section and the flashiness section as shown below.
+```xml {4, 13} filename="carcols.meta"
+...
+<Item> <!--siren1-->
+  <rotation>
+    <delta value="1.57079633" />
+    <start value="0.00000000" />
+    <speed value="3.00000000" />
+    <sequencer value="572662306" />
+    <multiples value="1" />
+    <direction value="false" />
+    <syncToBpm value="true" />
+  </rotation>
+  <flashiness>
+    <delta value="1.57079633" />
+    <start value="0.00000000" />
+    <speed value="3.00000000" />
+    <sequencer value="572662306" />
+    <multiples value="1" />
+    <direction value="false" />
+    <syncToBpm value="true" />
+  </flashiness>
+</Item>
+...
+```
+### Sequencers
 
-## Rotator Lights
+Sequencers are decimal values that represent 32-bit binary strings. Sequencers are converted to binary at runtime 
+and used to determine the pattern that sirens flash in.
 
-For information on rotators click through to the content [originally hosted here](https://www.modding-forum.com/guide/20-emergency-lights-rotator-lightbars-and-wig-wags/) by [Smanbg](https://www.modding-forum.com/user/915-smanbg/), [Cj24](https://www.modding-forum.com/user/2-cj24/) and [PNWParksFan](https://www.modding-forum.com/user/2672-pnwparksfan/). A small snippet is shown below.
+Each digit of the 32 digit binary value represents a "tick" of the BPM value. On each tick, the siren is either turned
+on when the value is 1 or off when the value is 0. This is the format that we edit sequencers in, but the game reads them as decimal values.
 
-> In comparison to your traditional strobe or LED lightbar with flashing lights, rotating lights require quite a different approach when using them, in particular, the sirens have to be covered, rather than scaled down. This guide is going to walk through the two common methods for rotator lightbars.
->
-> First and foremost, the rotating modules have to be attached to the emissives, as that is what forms the siren - a rotating module and the emissive itself, and lastly - reset the local axis. After that is done, set your lightbar up as you would any lightbar, this also applies to any modules that are not rotatable.
->
-> The next step on the list is covering the emissives. The rotator lightbar is a constant-spinning bar that relies on the rotation section of your siren in the carcols, which is also why it cannot be scaled and why the emissives should be covered when the lights are not on.
+Binary sequence example:
 
-### Rotator Speed
+``11110000111100001111000011110000``
 
-It is possible to decrease the speed of rotators without decreasing the BPM and instead using the speed value and adjusted sequencers. In the rotation settings, syncToBpm must be turned off to be able to use the speed value. The exact speed value required depends on your BPM and the sequencer.
+Decimal value for the above sequence: 
 
-To slow down the lights, slower sequencers must be used, the more 1s are in the sequencer, the higher the speed. 1s must always be separated by an equal number of 0s. This results in the following sequencers and speed values:
+``4042322160``
 
-![](https://i.imgur.com/GDZjwps.png)
+The decimal value is what we will use in ``carcols.meta``. Be sure to set the sequencer value in both the rotation section and the flashiness section as shown below.
+```xml {6, 15} filename="carcols.meta"
+<Item> <!--siren1-->
+  <rotation>
+    <delta value="1.57079633" />
+    <start value="0.00000000" />
+    <speed value="3.00000000" />
+    <sequencer value="4042322160" />
+    <multiples value="1" />
+    <direction value="false" />
+    <syncToBpm value="true" />
+  </rotation>
+  <flashiness>
+    <delta value="1.57079633" />
+    <start value="0.00000000" />
+    <speed value="3.00000000" />
+    <sequencer value="4042322160" />
+    <multiples value="1" />
+    <direction value="false" />
+    <syncToBpm value="true" />
+  </flashiness>
+</Item>
+```
 
-The speed value must be set proportionally to the BPM and the sequencer. To calculate the required speed value, use the following formula:
 
-![](https://i.imgur.com/hhlsHs7.png)
+To convert binary values to decimal values you can use any online tool such as [Rapid Tables](https://www.rapidtables.com/convert/number/binary-to-decimal.html).
 
-Good Rotary BPM is 120 BPM with Flash set to False
+There are multiple ways you could go about creating sequencer binary values and patterns.
+The first method is by just manually creating a binary value in any text editor (otherwise known as torture).
+The more efficient method is by using Siren Tool which will allow you to visually generate sequencer values, and converts them for you,
+or generates an entire ``carcols.meta`` file for you.
 
-## Light Groups
+Check out the page below to get started with Siren Tool.
 
-This section needs contributors. If you know anything about Light Groups, fork the repository to contribute!
+<div className="nx-mt-4">
+  <PageCard 
+    name="Siren Tool"
+    description="A tool for generating sequencer values and carcols.meta files."
+    link="https://dwnstr.com/sirentool"
+  />
+</div>
 
-_Alternatively, join our Discord and contact us!_
 
-## Light Colors
 
-These values go here: `<color value="0xFF0000FF"/>`
+### Coronas
 
-Data gathered by Zero parsed by, HairyMineFart, and Organized by Dawnstar
+Coronas are the orbs of light that appear on the vehicle when the siren is on. You can control the size, intensity of the coronas.
 
-Metallic Colors and Matte Colors have been excluded as they serve no purpose in siren colors.
+```xml {3, 4, 5} filename="carcols.meta"
+...
+<corona>
+  <intensity value="0.00000001" />
+  <size value="0.10000000" />
+  <pull value="0.15000000" />
+</corona>
+...
+```
+Most people choose to entirely hide the coronas by using values similar to the ones above.
 
-[Find the full list of colors here](https://www.se7ensins.com/forums/threads/vehicle-colors.1169166/)
+### Speed Value
+This section needs contributors! 
+Click ``Edit this page`` on the right or learn other ways to contribute [here!](/#you-can-contribute)
+
+### Light Groups
+This section needs contributors! 
+Click ``Edit this page`` on the right or learn other ways to contribute [here!](/#you-can-contribute)
+
+### Colors
+
+```xml
+<color value="0xFFFF0000">
+```
 
 **Most Used Colors**
 
@@ -127,56 +191,82 @@ Metallic Colors and Matte Colors have been excluded as they serve no purpose in 
 | MetallicGold   | `0xFFAD7B47`  | 255, 173, 123, 71  |
 | ClassicWhite   | `0xFFF0F0F0`  | 255, 240, 240, 240 |
 
-**Classic Colors**
+{/* use credit component */}
+Data gathered by Zero parsed by, HairyMineFart, and Organized by Dawnstar
 
-| Color Name      | Hex          | ARGB               |
-| --------------- | ------------ | ------------------ |
-| RED             | `0xFF690000` | 255, 105, 0, 0     |
-| TORINO\_RED     | `0xFF8A0B00` | 255, 138, 11, 0    |
-| FORMULA\_RED    | `0xFF6B0000` | 255, 107, 0, 0     |
-| LAVA\_RED       | `0xFF6B0B00` | 255, 107, 11, 0    |
-| BLAZE\_RED      | `0xFF611009` | 255, 97, 16, 9     |
-| GRACE\_RED      | `0xFF4A0A0A` | 255, 74, 10, 10    |
-| GARNET\_RED     | `0xFF470E0E` | 255, 71, 14, 14    |
-| SUNSET\_RED     | `0xFF380C00` | 255, 56, 12, 0     |
-| CABERNET\_RED   | `0xFF26030B` | 255, 38, 3, 11     |
-| WINE\_RED       | `0xFF080000` | 255, 8, 0, 0       |
-| CANDY\_RED      | `0xFF630012` | 255, 99, 0, 18     |
-| HOT PINK        | `0xFFB01259` | 255, 176, 18, 89   |
-| PINK            | `0xFF8F2F55` | 255, 143, 47, 85   |
-| SALMON\_PINK    | `0xFFF69799` | 255, 246, 151, 153 |
-| SUNRISE\_ORANGE | `0xFF802800` | 255, 128, 40, 0    |
-| BRIGHT\_ORANGE  | `0xFFC26610` | 255, 194, 102, 16  |
-| GOLD            | `0xFF5E5343` | 255, 94, 83, 67    |
-| BRONZE          | `0xFF4A341B` | 255, 74, 52, 27    |
-| YELLOW          | `0xFFF5890F` | 255, 245, 137, 15  |
-| FLUR\_YELLOW    | `0xFFA2A827` | 255, 162, 168, 39  |
-| DARK\_GREEN     | `0xFF001207` | 255, 0, 18, 7      |
-| SEA\_GREEN      | `0xFF00211E` | 255, 0, 33, 30     |
-| OLIVE\_GREEN    | `0xFF1F261E` | 255, 31, 38, 30    |
-| BRIGHT\_GREEN   | `0xFF003805` | 255, 0, 56, 5      |
-| PETROL\_GREEN   | `0xFF0B4145` | 255, 11, 65, 69    |
-| LIME\_GREEN     | `0xFF568F00` | 255, 86, 143, 0    |
-| MIDNIGHT\_BLUE  | `0xFF000108` | 255, 0, 1, 8       |
-| GALAXY\_BLUE    | `0xFF000D14` | 255, 0, 13, 20     |
-| DARK\_BLUE      | `0xFF001029` | 255, 0, 16, 41     |
-| SAXON\_BLUE     | `0xFF1C2F4F` | 255, 28, 47, 79    |
-| BLUE            | `0xFF001B57` | 255, 0, 27, 87     |
-| MARINER\_BLUE   | `0xFF3B4E78` | 255, 59, 78, 120   |
-| HARBOR\_BLUE    | `0xFF272D3B` | 255, 39, 45, 59    |
-| DIAMOND\_BLUE   | `0xFF95B2DB` | 255, 149, 178, 219 |
-| SURF\_BLUE      | `0xFF3E627A` | 255, 62, 98, 122   |
-| NAUTICAL\_BLUE  | `0xFF1C3140` | 255, 28, 49, 64    |
-| RACING\_BLUE    | `0xFF0E316D` | 255, 14, 49, 109   |
-| LIGHT\_BLUE     | `0xFF395A83` | 255, 57, 90, 131   |
-| PURPLE          | `0xFF1A182E` | 255, 26, 24, 46    |
-| SPIN\_PURPLE    | `0xFF161629` | 255, 22, 22, 41    |
-| MIGHT\_PURPLE   | `0xFF050008` | 255, 5, 0, 8       |
-| BRIGHT\_PURPLE  | `0xFF320642` | 255, 50, 6, 66     |
-| CREAM           | `0xFFCFC0A5` | 255, 207, 192, 165 |
-| FROST\_WHITE    | `0xFFB3B9C9` | 255, 179, 185, 201 |
+Non-standard colors were excluded, but could give different results than the one above. If you want to try other values you can 
+[find the full list of colors here](https://www.se7ensins.com/forums/threads/vehicle-colors.1169166/)
 
-## Carcols Variables
+## Environment Lighting
+
+Whenever the Siren is on it shines light in the world. You can control the intensity, angle, and color of the light. 
+
+The four main values are ``lightFalloffMax``, ``lightFalloffExponent``, ``lightInnerConeAngle`` and ``lightOuterConeAngle``. 
+View this diagram below to get an idea of how they each effect the light source.
+
+![](https://codahosted.io/docs/IEZ3CWmYBK/blobs/bl-\_tjAgQWRtn/e151c016eeec2162f59c60f62d688f70c3bb7eb3094241fc667105f1ae358f236ee00911d3ed3adde344e4c6570158689af0224637472323f949a5df02253526b328f9860bdf2afc98b53ba952720860a41c4b0224a012bda264fbb3ca349aaecd9b1f22)
+
+### ``lightFalloffMax``
+Controls the maximum distance that the light can reach. Works like a "power" value if everything else is setup properly.
+A good range for this value is between 40 and 100.
+
+```xml
+<lightFalloffMax value="80.00000000" />
+```
+
+### ``lightFalloffExponent``
+Controls how quickly the light fades out as it reaches the ``lightFalloffMax`` distance. This value should be around 65% of the ``lightFalloffMax`` value
+for the best results.
+
+```xml
+<lightFalloffExponent value="52.00000000" />
+```
+
+<Callout>
+This value must always be lower than ``lightFalloffMax``!!!!!
+</Callout>
+
+### ``lightInnerConeAngle``
+Controls where the light starts to fade out horizontally. Inside this angle, the light will remain at 100% strength (horizontally/inside to outside).
+This value should be between 2 and 10 for best results.
+
+```xml
+<lightInnerConeAngle value="2.30000000" />
+```
+
+### ``lightOuterConeAngle``
+Controls the width of the light cone. This value should be between 30 and 90 for best results depending on your use case.
+A lower value will create a more focused light like a spotlight, and a higher value will create a wider light like a floodlight.
+
+```xml
+<lightOuterConeAngle value="70.00000000" />
+```
+
+## Rotator Lights
+
+For information on rotators click through to the content [originally hosted here](https://www.modding-forum.com/guide/20-emergency-lights-rotator-lightbars-and-wig-wags/) by [Smanbg](https://www.modding-forum.com/user/915-smanbg/), [Cj24](https://www.modding-forum.com/user/2-cj24/) and [PNWParksFan](https://www.modding-forum.com/user/2672-pnwparksfan/). A small snippet is shown below.
+
+> In comparison to your traditional strobe or LED lightbar with flashing lights, rotating lights require quite a different approach when using them, in particular, the sirens have to be covered, rather than scaled down. This guide is going to walk through the two common methods for rotator lightbars.
+>
+> First and foremost, the rotating modules have to be attached to the emissives, as that is what forms the siren - a rotating module and the emissive itself, and lastly - reset the local axis. After that is done, set your lightbar up as you would any lightbar, this also applies to any modules that are not rotatable.
+>
+> The next step on the list is covering the emissives. The rotator lightbar is a constant-spinning bar that relies on the rotation section of your siren in the carcols, which is also why it cannot be scaled and why the emissives should be covered when the lights are not on.
+
+### Rotator Speed
+
+It is possible to decrease the speed of rotators without decreasing the BPM and instead using the speed value and adjusted sequencers. In the rotation settings, syncToBpm must be turned off to be able to use the speed value. The exact speed value required depends on your BPM and the sequencer.
+
+To slow down the lights, slower sequencers must be used, the more 1s are in the sequencer, the higher the speed. 1s must always be separated by an equal number of 0s. This results in the following sequencers and speed values:
+
+![](https://i.imgur.com/GDZjwps.png)
+
+The speed value must be set proportionally to the BPM and the sequencer. To calculate the required speed value, use the following formula:
+
+![](https://i.imgur.com/hhlsHs7.png)
+
+Good Rotary BPM is 120 BPM with Flash set to False
+
+## Other Values
 
 ### id
 
@@ -191,50 +281,6 @@ Should be between 1000-40000 for most consistent results. Some numbers don't wor
 Multiplies the BPM by the value specified.
 
 `<timeMultiplier value="1.00000000"/>` Time x BPM (Ex. 1.0 x 600 = 600 BPM)
-
-### Environment Lighting
-
-![](https://codahosted.io/docs/IEZ3CWmYBK/blobs/bl-\_tjAgQWRtn/e151c016eeec2162f59c60f62d688f70c3bb7eb3094241fc667105f1ae358f236ee00911d3ed3adde344e4c6570158689af0224637472323f949a5df02253526b328f9860bdf2afc98b53ba952720860a41c4b0224a012bda264fbb3ca349aaecd9b1f22)
-
-### lightFalloffMax
-
-Controls the maximum distance that the light can reach. Works like a “power” value in the right conditions.
-
-Value should be between 40 and 100 for best results.
-
-`<lightFalloffMax value="100.00000000"/>`
-
-### lightFalloffExponent
-
-Controls how fast light reaches 0% after traveling away from source.
-
-Value should ALWAYS be lower than FalloffMax!!!!!!
-
-Value should be about 65% of FalloffMax for best results.
-
-`<lightFalloffExponent value="100.00000000"/>`
-
-### lightInnerConeAngle
-
-Controls where light starts to fall off . Before this point, light will be at 100% horizontally/parallel to the source/inside to outside.
-
-Value should ALWAYS be LOWER than LightOuterConeAngle!!!!
-
-Value should be between 2 and 10 for best results
-
-`<lightInnerConeAngle value="2.29061000"/>`
-
-### lightOuterConeAngle
-
-Controls the maximum width of the light cone, where light will be 0%
-
-Value should be between 60 and 90 for best results
-
-`<lightOuterConeAngle value="70.00000000"/>`
-
-### lightOffset
-
-`<lightOffset value="0.00000000"/>`
 
 ### textureName
 
@@ -278,7 +324,9 @@ The default/standard sequencers that will give you the typical back and forth wi
       <useRealLights value="true"/>     --If you want the Flashes to actually use the Headlights
 ```
 
-## Custom Light IDs
+{/* TODO re-do and reintroduce this section */}
+{/* would be nice to place the example in a gist since its so large */}
+{/* ## Custom Light IDs
 
 ```xml
 <CVehicleModelInfoVarGlobal>
@@ -452,9 +500,10 @@ _
 <textureName>VehicleLight_misc_searchlight</textureName>
 <textureName>VehicleLight_misc_searchlight2</textureName>
 <textureName>VehicleLight_sirenlight</textureName>
-```
+``` */}
 
-## Siren Walkthrough
+{/* just saving this for reference */}
+{/* ## Siren Walkthrough
 
 ```xml
 <Item> --siren#
@@ -496,71 +545,79 @@ _
    <spotLight value="true"/> --If True = 180 Degrees | False = Light angle set in Pre-Siren
    <castShadows value="false"/> --If True = Light will cast shadows of Player/Car
 </Item>
-```
+``` */}
 
 ## Modkits
 
 ### Overview
 
-The carcols controlls the modkits items that are on the vehicle. This includes things like aftermarket parts such as exhausts, trims, steering wheels etc. There are a lot of options avaliable to control what the modkits do.
+``carcols.meta`` controls the modkits items that are on the vehicle. This includes aftermarket parts such as exhausts, trims, steering wheels etc. 
+There are many different options avaliable to control what the modkits do.
 
-#### Step 1
+### How to Setup Modkits
+To keep the file formatted in a way that aligns with GTA, the modkit items should be put at the very beginning of the carcols file.
+Add a modkit item to the carcols file by using the following code:
 
-To keep the file formatted in a way that aligns with GTA, the modkit items should be put at the very beginning of the carcols file. Below the following lines:
-
-```xml
+```xml {3, 4, 5, 6, 7} filename="carcols.meta"
 <?xml version="1.0" encoding="UTF-8"?>
 <CVehicleModelInfoVarGlobal>
+  <Kits>
+    <Item>
+
+    </Item>
+  </Kits>
+...
 ```
 
-#### Step 2
+Now give your modkit a name, id, and kitType. The name will be how you reference the modkit later.
+Your modkit name should be followed by ``_modkit``
 
-On line 3 write:
+The ID value is a unique number to identify the modkit similar to the siren ID value. This makes sure the modkits are unique to the vehicle.
 
-```xml
-<Kits>
-  <Item>
-    
-  </Item>
-</Kits>
+There is limited information available about the kitType, leaving it as ``MKT_SPECIAL`` will work.
+
+```xml {5, 6, 7}
+<?xml version="1.0" encoding="UTF-8"?>
+<CVehicleModelInfoVarGlobal>
+  <Kits>
+    <Item>
+      <kitName>myVehicle_modkit</kitName>
+      <id value="47543" />
+      <kitType>MKT_SPECIAL</kitType>
+    </Item>
+  </Kits>
+...
 ```
 
-This will tell the carcols we are starting the options for the modkits. Once you have this in place, on the line below the opening tag, we will now define the modkit name. This modkit name will allow the modkit set up that you will create be used anywhere as long as the vehicle & modkits are actively streamed.
+### Adding Modkit Items
 
-#### Step 3
+Modkit parts need to be exported from ZModeler and placed in the ``stream`` folder.
+Visible mods will go in the ``visibleMods`` tag like below.
 
-```xml
-<kitName>myVehicle_modkit</kitName>
-<id value="47543" />
-<kitType>MKT_SPECIAL</kitType>
+```xml {8, 9, 10} filename="carcols.meta"
+<?xml version="1.0" encoding="UTF-8"?>
+<CVehicleModelInfoVarGlobal>
+  <Kits>
+    <Item>
+      <kitName>myVehicle_modkit</kitName>
+      <id value="47543" />
+      <kitType>MKT_SPECIAL</kitType>
+      <visibleMods>
+        <!-- items -->
+      </visibleMods>
+    </Item>
+  </Kits>
+...
 ```
 
-The modkit name can be anything. Normally, the name will end in \_modkit.
+Each of our items will go inside those tags.
 
-The ID value below it is very similar to the siren ID value. It uniquely identifies the modkit and makes sure the modkits are unique to the vehicle.
-
-For the kitType there isn't a lot of information on what this does, therefore its best to leave it as MKT\_SPECIAL.
-
-#### Step 4
-
-Now we shall get into defining the individual modkit parts. Once you have exported the modkit items and have put them in your stream folder we can move on. First, you will need to define you are making visable mods by opening the following tags:
-
-```xml
-<visibleMods>
-
-</visibleMods>
-```
-
-This will allow us to create individual items for each individual parts.
-
-#### Step 5
-
-Now we can define individual parts:
+Here's an example item:
 
 ```xml
 <Item>
-  <modelName>MODKIT_NAME</modelName>
-  <modShopLabel>MODKIT_SHOP_LABEL</modShopLabel>
+  <modelName>ITEM_NAME</modelName>
+  <modShopLabel>ITEM_SHOP_LABEL</modShopLabel>
   <linkedModels />
   <turnOffBones>
     <Item>misc_*</Item>
@@ -574,10 +631,10 @@ Now we can define individual parts:
   <turnOffExtra value="false" />
   <disableBonnetCamera value="false" />
   <allowBonnetSlide value="true" />
- </Item>
+</Item>
 ```
 
-This is the meat and bones of the modkits.
+Below are the different options you can use for the modkit items.
 
 | Tag Name            | What is is?                                                                                                                                                                                                                      | Accepted value type | Options                                                                            |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------- |
@@ -595,11 +652,11 @@ This is the meat and bones of the modkits.
 | disableBonnetCamera | This option turns off the bonnet camera off when the modkit item in enabled in game.                                                                                                                                             | Boolean             | true / false                                                                       |
 | allowBonnetSlide    | This will stop players from sliding over the bonnet when the modkit item is enabled.                                                                                                                                             | Boolean             | true / false                                                                       |
 
-#### Debugging modkits
+### Debugging modkits
 
 If in the event your modkits do not work, here are some tips on how to fix it:
 
-* Ensure your modkit ID at [Step 3](Carcols.md#step-3) is unique to the individual vehicle. The values can be from 0-1023 but some may overlap with other vehicles. Just keep changing the ID until your options show up for you. You do not need to restart the server to update this.
-* The kiteName at [Step 3](Carcols.md#step-3) is not in the carvariations.meta.
-* The .yft modkit is not in the stream folder. Ensure they are all in there.
-* The modelName is not the same as the name of the .yft modkit in the stream folder. Ensure they are both the same.
+* Ensure your modkit ID is unique to the individual vehicle. The values can be from 0-1023 but some may overlap with other vehicles. Just keep changing the ID until your options show up for you. You do not need to restart the server to update this.
+* Ensure that the kiteName is in [carvariations.meta](/data-files/carvariations.mdx)
+* Ensure that the .yft modkit items are in the stream folder.
+* Ensure that the modelName is the same as the name of the .yft modkit in the stream folder.
