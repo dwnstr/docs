@@ -3,12 +3,14 @@ title: What is Non-ELS?
 description: Learn the basics of emergency lighting with Non-ELS for FiveM and GTA vehicles.
 ---
 
+import PageCard from "../../components/PageCard";
+
 # What is Non-ELS?
 
-<img 
-  alt="" 
-  src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnQ5cWpyenM0bzB0OXdsa2ptcHJjOXU5dmtwaHdnb2R3YmFsd29xaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Vr3uWfDIud1mrw5Ohi/giphy.gif"
-  className="nx-rounded-lg nx-mt-6"
+<img
+  alt=''
+  src='https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnQ5cWpyenM0bzB0OXdsa2ptcHJjOXU5dmtwaHdnb2R3YmFsd29xaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Vr3uWfDIud1mrw5Ohi/giphy.gif'
+  className='nx-rounded-lg nx-mt-6'
 />
 
 Non-ELS (or just GTA emergency lighting) is the default system in GTA IV and GTA V for emergency vehicle lighting.
@@ -17,8 +19,12 @@ Non-ELS is the default system, and far more powerful than ELS though more diffic
 
 For the purposes of this guide, we will use "the lighting system" to refer to Non-ELS in an effort to correct this misconception.
 
+This tutorial will put you on the path to success by teaching you the 3D fundamentals that most people skip over or fail to understand. Everything
+you learn in this tutorial is also applicable to other 3D work in other environments, so its a great introduction to 3D work in general.
+
 ## How does it work?
-The lighting system works by using configuration objects known as "Sirens" found in ``carcols.meta`` to control emergency lighting on vehicles.
+
+The lighting system works by using configuration objects known as "Sirens" found in `carcols.meta` to control emergency lighting on vehicles.
 
 Each siren is represented by an empty object in the game world (also known as a "dummy") and has settings to control various properties of lights.
 
@@ -26,10 +32,11 @@ Originally, a siren was only used to display a corona (an orb of light that rend
 With GTA V sirens gained the ability to control a mesh (a 3D model) to make it appear to flash. This is how we can have the complex patterns we see today.
 
 Each siren flashes in accordance with a 32 bit binary number such as `11110000111100001111000011110000`. Based on a BPM value, the game will read this number
-from left to right and each tick will turn the siren on if the number is 1, and off if the number is 0. These numbers (called "sequencers") are represened in 
-decimal format in ``carcols.meta``.
+from left to right and each tick will turn the siren on if the number is 1, and off if the number is 0. These numbers (called "sequencers") are represened in
+decimal format in `carcols.meta`.
 
 The most important things to remember are:
+
 - Sirens make the mesh appear to flash by scaling it up and down rather than turning it on and off
 - Sirens are represented by empty objects called dummies
 - Sirens can appear to control more than one light module
@@ -39,6 +46,7 @@ The most important things to remember are:
 While the lighting system may seem complicated at first, with an understanding of some fundamental 3D concepts and basics of how the game works, it is actually quite simple.
 
 These concepts are:
+
 - **Transforms** - The position, rotation, and scale of an object in 3D space.
 - **Object Origins/Pivots** - The point on an object that is used as the reference point for transforms.
 - **Parenting** - The relationship between two objects where one object is the parent, and one is the child.
@@ -47,33 +55,79 @@ These 2 concepts will give you an understanding of 90% of the lighting system. T
 
 ### Transforms
 
-In 3D space, an object has a position, rotation, and scale. These are called transforms. Transforms are most often represented as vectors which are 
+In 3D space, an object has a position, rotation, and scale. These are called transforms. Transforms are most often represented as vectors which are
 just a fancy way of saying a list of 3 numbers.
 
 We will focus primarily on scale for the purposes of this guide, but it is important to understand that all 3 transforms are important.
 
-#### Scale 
+#### Scale
+
 Scale is represented as a vector of 3 numbers, one for each axis. The X axis is left/right, the Y axis is up/down, and the Z axis is forward/backward.
-It controls the size of an object. A scale of ``1,1,1`` is the default size. A scale of ``2,2,2`` is twice as large, and a scale of ``0.5,0.5,0.5`` is half as large.
+It controls the size of an object. A scale of `1,1,1` is the default size. A scale of `2,2,2` is twice as large, and a scale of `0.5,0.5,0.5` is half as large.
 
 #### Origins / Pivots
-Object origins are the point on an object that is used as the reference point for transforms. For example, if you have a cube, and you set the scale to ``2,2,2``,
+
+Object origins are the point on an object that is used as the reference point for transforms. For example, if you have a cube, and you set the scale to `2,2,2`,
 the cube will double in size, but it will double in size from the origin.
 
-In this image you can see a mesh and an origin. The origin is the orange dot located behind the mesh. 
+In this image you can see a mesh and an origin. The origin is the orange dot located behind the mesh.
 
 ![](https://user-images.githubusercontent.com/48927090/204694490-6d12779d-c3ad-4ec1-aab8-2754bb0c48c6.png)
 
-This second image shows the same mesh but scaled down. Notice how the object moved toward the origin. This is because the origin is the reference point for transforms.
-If the origin was in the center of the mesh rather than behind it, the mesh would have scaled in place rather than appearing to move.
+This second image shows the same mesh but scaled down. Notice how the object moved toward the origin. This
+is because the origin is the reference point for transforms.If the origin was in the center of the mesh rather
+than behind it, the mesh would have scaled in place rather than appearing to move.
 
 ![](https://user-images.githubusercontent.com/48927090/204694555-da1386b8-2d83-4f3d-90a0-ebdffc40f654.png)
 
-This interaction is the core of the lighting system. It's how we hide the emissive meshes while they are off and show them when they are on.
+This interaction is the core of the lighting system. It's how we hide the emissive meshes while they are off
+and show them when they are on.
 
 ### Parenting
 
-Parenting is the relationship between two objects where one object is the parent, and one is the child. The child object will inherit the parent's transforms.
-An obect can have multiple children, but only one parent.
+Parenting is the relationship between two objects where one object is the parent, and one is the child. An object
+can have multiple children, but only one parent. Parenting is often represented in 3D software as nested objects.
 
-Parenting is often represented in 3D software as nested objects.
+When an object is the child of another object, it will inherit the parent's transforms. For example, if you have a
+cube attached to another cube and you rotate the parent cube,the child cube will rotate with it. If you scale the
+parent cube, the child cube will scale with it.
+
+This is important for the lighting system because it allows us to create the effect that the emissive mesh is
+turning on and off by scaling the parent object (the siren).
+
+## More on Sirens
+
+Now you know how sirens are able to make the emissive mesh appear to flash to create the effect of emergency lighting,
+but as you learned, a siren is just an empty object, so what makes the siren itself work?
+
+Each siren has a configuration in the `carcols.meta` file for the vehicle. These configurations determine how each
+siren will behave.
+
+The key part of the siren configuration is the sequencer. The sequencer is a 32 bit binary number such as
+`11110000111100001111000011110000`. Based on a BPM value, the game will read this number from left to right and each
+tick will scale the siren up if the number is 1, and down if the number is 0. This is what creates the flashing effect.
+
+![](https://i.imgur.com/pjWJc6T.gif)
+
+You can learn more about `carcols.meta` here:
+
+<div className='nx-grid lg:nx-grid-cols-2 nx-gap-4 nx-mt-4'>
+  <PageCard
+    name='carcols.meta'
+    description='Learn about the carcols.meta file and how it is used to configure emergency lighting.'
+    link='/data-files/carcols'
+  />
+</div>
+
+## Review
+
+Now you should have a basic understanding of how the lighting system works!
+
+- Sirens are empty objects controled by `carcols.meta`
+- Emissive meshes are parented to sirens
+- Sirens scale up and down to make the emissive mesh appear to flash
+
+If you are new to 3D work, this may seem confusing at first, but once you start working with it it will all start
+to make sense as it is very intuitive. (It's harder to explain than it is to do!)
+
+{/* ## What to Read Next */}
