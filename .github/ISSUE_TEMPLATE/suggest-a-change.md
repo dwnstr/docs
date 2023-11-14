@@ -2,7 +2,7 @@
 name: Suggest a change
 about: Suggest a correction or addition to the docs!
 title: "[Suggestion] Your title here"
-labels: ''
+labels: suggestion
 assignees: ''
 
 ---
@@ -13,4 +13,4 @@ assignees: ''
 
 ### Suggestion
 
-[Example: add a new page about baking cookies]
+[your suggestion here]
