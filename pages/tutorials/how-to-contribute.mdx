@@ -1,0 +1,86 @@
+---
+title: How to Contribute
+description: Learn how to contribute to these docs!
+---
+
+import Button from '../../components/Button'
+import { Cards, Card } from 'nextra-theme-docs'
+import { BadgeAlert, Code, PenLine } from 'lucide-react'
+import { Steps } from 'nextra-theme-docs'
+
+# How to Contribute
+
+Anyone who wants to is able to contribute to any of the content on this site!
+If you see something you want to change, or have an idea for something you
+want to add, follow the instructions below to get started.
+
+<Cards>
+  <Card icon={<BadgeAlert />} title="Suggest change (Easy)" href="/tutorials/how-to-contribute/#suggest-a-change" />
+  <Card icon={<PenLine />} title="Edit Online (Medium)" href="/tutorials/how-to-contribute/#edit-on-web" />
+  <Card icon={<Code />} title="Edit Locally (Advanced)" href="/tutorials/how-to-contribute/#edit-locally" />
+</Cards>
+
+## Suggest a change
+ 
+ This method is the easiest and requires no coding knowledge or experience! Simply create
+ a Github issue with your suggestion. Others will be able to view and discuss your suggestion
+ within the issue, then if your suggestion is good, someone will add it to the docs!
+
+<Steps>
+### Create a new issue with your suggestion
+
+<div className="nx-mt-8">
+ <Button label="Create issue" href="https://github.com/dwnstr/docs/issues/new?assignees=&labels=suggestion&projects=&template=suggest-a-change.md&title=%5BSuggestion%5D+Your+title+here"/>
+</div>
+
+### Type your suggestion and create the issue!
+
+That's it!
+</Steps>
+
+## Edit on web
+
+If you have some experience with coding and markdown and you want to make your changes 
+directly, the first option is by editing the files on Github's web editor!
+
+<Steps>
+### Find the page you want to edit
+
+Most pages have a ``.mdx`` or ``.md`` file that directly matches it's title. For example,
+this page would be found as ``how-to-contribute.mdx``.
+
+Other files, however, don't match perfectly.
+
+Pages are grouped the same way they are in the left sidebar!
+
+<div className="nx-mt-8">
+ <Button label="View files" href="https://github.com/dwnstr/docs/tree/main/pages"/>
+</div>
+
+### Click the pencil icon to edit
+
+![](https://i.imgur.com/qdeqSZl.png)
+
+### Create a pull request
+
+When prompted, fork the repository and then create your pull request to suggest
+your edits! A maintainer will review your changes and either merge them with the
+live site, or let you know what needs to be adjusted.
+
+</Steps>
+
+## Edit Locally
+
+If you're experienced with programming and markdown, you can clone the repository and
+make your changes locally.
+
+<Steps>
+### Clone the repo
+
+### Initialize the project
+```pnpm i```
+
+```pnpm dev```
+
+### Make your changes and submit a pull request!
+</Steps>

@@ -19,6 +19,7 @@
   "homepage": "https://github.com/dwnstr/docs#readme",
   "dependencies": {
     "@vercel/analytics": "^1.0.1",
+    "lucide-react": "^0.292.0",
     "next": "^13.0.6",
     "nextra": "latest",
     "nextra-theme-docs": "latest",

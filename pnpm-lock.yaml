@@ -8,6 +8,9 @@ dependencies:
   '@vercel/analytics':
     specifier: ^1.0.1
     version: 1.0.1
+  lucide-react:
+    specifier: ^0.292.0
+    version: 0.292.0(react@18.2.0)
   next:
     specifier: ^13.0.6
     version: 13.0.6(react-dom@18.2.0)(react@18.2.0)
@@ -1654,6 +1657,14 @@ packages:
     dependencies:
       pseudomap: 1.0.2
       yallist: 2.1.2
+    dev: false
+
+  /lucide-react@0.292.0(react@18.2.0):
+    resolution: {integrity: sha512-rRgUkpEHWpa5VCT66YscInCQmQuPCB1RFRzkkxMxg4b+jaL0V12E3riWWR2Sh5OIiUhCwGW/ZExuEO4Az32E6Q==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /markdown-extensions@1.1.1:
