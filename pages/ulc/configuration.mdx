@@ -3,22 +3,23 @@ title: ULC Configuration Overview
 description: An overview of ULC features and configuration options.
 ---
 
-import Button from '../../components/Button'
-import Video from '../../components/Video'
-import PageCard from '../../components/PageCard'
-import { Steps } from 'nextra-theme-docs'
-import { Callout } from 'nextra-theme-docs'
-import { Tab, Tabs } from 'nextra-theme-docs'
+import Button from "../../components/Button";
+import Video from "../../components/Video";
+import PageCard from "../../components/PageCard";
+import { Steps } from "nextra-theme-docs";
+import { Callout } from "nextra-theme-docs";
+import { Tab, Tabs } from "nextra-theme-docs";
 
 export const meta = {
-  title: 'ULC Configuration Overview',
-  description: 'An overview of ULC features and configuration options.',
-}
+  title: "ULC Configuration Overview",
+  description: "An overview of ULC features and configuration options.",
+};
 
 # Configuration
+
 An overview of ULC features and configuration options.
 
-<Video url="https://www.youtube.com/watch?v=FIF3qqRY0Ts"/>
+<Video url='https://www.youtube.com/watch?v=FIF3qqRY0Ts' />
 
 ULC was designed to be as user-friendly and flexible as possible.
 
@@ -30,99 +31,109 @@ out-of-the-box!
 
 ## Review the global settings
 
-  The top section of the ``config.lua`` file in the root of the resource contains
-  a series of global settings. These settings determine the behavior of some
-  features.
+The top section of the `config.lua` file in the root of the resource contains
+a series of global settings. These settings determine the behavior of some
+features.
 
-  **Most of these settings can be left at their default values.**
+**Most of these settings can be left at their default values.**
 
-  <Callout type="info">
-    If you're using Luxart Vehicle Controls
-    or a similar resource that plays a tone when lights are turned on
-    you should set `muteBeepForLights` to `true`
-  </Callout>
+{" "}
 
-  ```lua
-    -- whether to mute the tone that plays when lights are turned on 
-    -- use if you have another resources that already plays a tone.
-    muteBeepForLights = true,
-    -- global toggle for UI (affects all clients)
-    hideHud = false,
-    -- whether to use KPH instead of MPH
-    useKPH = false,
-    -- health threshold for effect (probably don't touch this)
-    healthThreshold = 990,
+<Callout type='info'>
+  If you're using Luxart Vehicle Controls or a similar resource that plays a
+  tone when lights are turned on you should set `muteBeepForLights` to `true`
+</Callout>
 
-    ParkSettings = {
-        -- Vehicle will be considered "parked" below this speed
-        speedThreshold = 1,
-        -- whether to disable the effect when a door is open (highly recommended)
-        checkDoors = true,
-        -- delay between checks, should not be lower than 0.5
-        delay = 0.5,
-        -- distance to sync park pattern (32 is roughly the Yellow Jack parking lot)
-        syncDistance = 32,
-        -- cooldown between sync attempts
-        syncCooldown = 10,
-    },
-        
-    SteadyBurnSettings = {
-        nightStartHour = 18,
-        -- should always be a lower number than start hour
-        nightEndHour = 6,
-        -- delay between checks, this can be very long, it will only make it more realistic
-        delay = 10,
-    },
-    ...
-  ```
+```lua
+  -- whether to mute the tone that plays when lights are turned on
+  -- use if you have another resources that already plays a tone.
+  muteBeepForLights = true,
+  -- global toggle for UI (affects all clients)
+  hideHud = false,
+  -- whether to use KPH instead of MPH
+  useKPH = false,
+  -- health threshold for effect (probably don't touch this)
+  healthThreshold = 990,
+
+  ParkSettings = {
+      -- Vehicle will be considered "parked" below this speed
+      speedThreshold = 1,
+      -- whether to disable the effect when a door is open (highly recommended)
+      checkDoors = true,
+      -- delay between checks, should not be lower than 0.5
+      delay = 0.5,
+      -- distance to sync park pattern (32 is roughly the Yellow Jack parking lot)
+      syncDistance = 32,
+      -- cooldown between sync attempts
+      syncCooldown = 10,
+  },
+
+  SteadyBurnSettings = {
+      nightStartHour = 18,
+      -- should always be a lower number than start hour
+      nightEndHour = 6,
+      -- delay between checks, this can be very long, it will only make it more realistic
+      delay = 10,
+  },
+  ...
+```
 
 ## Configure your first vehicle
 
-By default, no vehicles are affected by ULC. In order for a vehicle to 
+By default, no vehicles are affected by ULC. In order for a vehicle to
 be affected by ULC there must be a configuration for it. Let's start by setting up your first vehicle.
 
 To do this, we will create a `ulc.lua` configuration file in your vehicle
 resource folder, and then point ULC to that file so it can load it.
 
 Follow the steps below!
+
 <Steps>
   <Callout type="info">
     If your vehicle came with a `ulc.lua` file, skip to step 7.
   </Callout>
 
-  ### Create `ulc.lua` file
-  Create a file at the root of your vehicle resource and name it `ulc.lua`
+### Create `ulc.lua` file
 
-  ### Open the [ULC Generator](http://ulc.dwnstr.com)
-  {/* link card */}
+Create a file at the root of your vehicle resource and name it `ulc.lua`
 
-  ### Define the model name
-  Add the name of your vehicle to the `names={}` table.
+### Open the [ULC Generator](https://ulc.dwnstr.com/generator)
 
-  ### Configure vehicle settings
+https://ulc.dwnstr.com/generator
 
-  ### Configure buttons
+{/* link card */}
 
-  ### Populate the `ulc.lua` file
-  Copy the contents of the generator and paste them into your `ulc.lua` file.
+### Define the model name
 
-  ### Add config to ULC
-  Open your ULC `config.lua` file and find the `ExternalVehResources` table.
-  Here you can add the resource name of the vehicle you just configured.
+Add the name of your vehicle to the `names={}` table.
 
-  This will tell ULC about the vehicle, and make it load the configuration
-  from the `ulc.lua` file.
+### Configure vehicle settings
 
-  ```lua
-    ExternalVehResources = {
-        "pd4",
-    },
-  ```
+### Configure buttons
 
-  ### Done!
-  Your vehicle is now configured and ready to go!
-  
-  Restart ULC and test it out and then repeat for your other vehicles!
+### Populate the `ulc.lua` file
+
+Copy the contents of the generator and paste them into your `ulc.lua` file.
+
+### Add config to ULC
+
+Open your ULC `config.lua` file and find the `ExternalVehResources` table.
+Here you can add the resource name of the vehicle you just configured.
+
+This will tell ULC about the vehicle, and make it load the configuration
+from the `ulc.lua` file.
+
+```lua
+  ExternalVehResources = {
+      "pd4",
+  },
+```
+
+### Done!
+
+Your vehicle is now configured and ready to go!
+
+Restart ULC and test it out and then repeat for your other vehicles!
 
 </Steps>
 
@@ -131,15 +142,21 @@ Follow the steps below!
 If you have a resource with multiple vehicles in it that all use the same
 ULC configuration, you can use a single `ulc.lua` file for all of them.
 
-Simply include all of the model names in the `names` field of the `ulc.lua` file.
+Simply include all of the model names in the `names` field of the `ulc.lua` file!
+Thant's it!
 
 ```lua
   names = {"pd4","pd5", "pd6"},
 ```
 
-If there are vehicles in the resource that use a different configuration
-you can create an additional configuration object within the same 
-`ulc.lua` file.
+<Callout type='info'>
+  {" "}
+  If there are vehicles in the resource that use a different configuration you can
+  create an additional configuration object within the same `ulc.lua` file.
+
+You can use the [ULC Config Generator](https://ulc.dwnstr.com/generator) to do this easily.
+
+</Callout>
 
 <details>
   <summary>
@@ -147,6 +164,45 @@ you can create an additional configuration object within the same
   </summary>
   ```lua
     return {names = {"sp20", "pd20"},
+      steadyBurnConfig = {
+          forceOn = false, useTime = false,
+          disableWithLights = false,
+          sbExtras = {}
+      },
+      parkConfig = {
+          usePark = true,
+          useSync = true,
+          syncWith = {'sp20', 'sp18chrg'},
+          pExtras = {10, 11},
+          dExtras = {}
+      },
+      hornConfig = {
+          useHorn = true,
+          hornExtras = {12}
+      },
+      brakeConfig = {
+          useBrakes = false,
+          speedThreshold = 3,
+          brakeExtras = {},
+          disableExtras = {}
+      },
+      -- example button
+      -- {label = 'STAGE 2', key = 5, extra = 8},
+      buttons = {
+        {label = 'stage 2', key = 5, extra = 8, offExtras = {10, 11}},
+          {label = 'TA', key = 6, extra = 9, offExtras = {}},
+          {label = 'AUX1', key = 7, extra = 10, offExtras = {}},
+          {label = 'AUX 2',key = 8,extra = 11, offExtras = {}},
+          {label = 'SCENE',key = 9,extra = 12, offExtras = {}},
+      },
+      defaultStages = {
+        useDefaults = false,
+        enableKeys = {},
+        disableKeys = {}
+      }
+
+    },
+    {names = {'pdram'},
       steadyBurnConfig = {
           forceOn = false,
           useTime = false,
@@ -167,52 +223,24 @@ you can create an additional configuration object within the same
       brakeConfig = {
           useBrakes = false,
           speedThreshold = 3,
-          brakeExtras = {}
+          brakeExtras = {},
+          disableExtras = {}
       },
-      -- example button
-      -- {label = 'STAGE 2', key = 5, extra = 8},
-        buttons = {
-          {label = 'stage 2', key = 5, extra = 8, offExtras = {10, 11}},
-            {label = 'TA', key = 6, extra = 9, offExtras = {}},
-            {label = 'AUX1', key = 7, extra = 10, offExtras = {}},
-            {label = 'AUX 2',key = 8,extra = 11, offExtras = {}},
-            {label = 'SCENE',key = 9,extra = 12, offExtras = {}},
-        }
-    },
-    {names = {'pdram'},
-      steadyBurnConfig = {
-            forceOn = false,
-            useTime = false,
-            disableWithLights = false,
-            sbExtras = {}
-        },
-        parkConfig = {
-            usePark = true,
-            useSync = true,
-            syncWith = {'sp20', 'sp18chrg'},
-            pExtras = {10, 11},
-            dExtras = {}
-        },
-        hornConfig = {
-            useHorn = true,
-            hornExtras = {12}
-        },
-        brakeConfig = {
-            useBrakes = false,
-            speedThreshold = 3,
-            brakeExtras = {}
-        },
-      -- example button
-      -- {label = 'STAGE 2', key = 5, extra = 8},
-        buttons = {
-          {label = 'stage 2', key = 5, extra = 8, offExtras = {10, 11}},
-            {label = 'TA', key = 6, extra = 9, offExtras = {}},
-            {label = 'AUX1', key = 7, extra = 10, offExtras = {}},
-            {label = 'AUX 2',key = 8,extra = 11, offExtras = {}},
-            {label = 'SCENE',key = 9,extra = 12, offExtras = {}},
-        }
+    -- example button
+    -- {label = 'STAGE 2', key = 5, extra = 8},
+      buttons = {
+        {label = 'stage 2', key = 1, extra = 8, offExtras = {10, 11}},
+          {label = 'TA', key = 2, extra = 9, offExtras = {}},
+          {label = 'TKD',key = 3,extra = 12, offExtras = {}},
+      }
+      defaultStages = {
+        useDefaults = false,
+        enableKeys = {},
+        disableKeys = {}
+      }
     }
     ```
+
 </details>
 
 ## Creating Non-ELS Vehicles for ULC
@@ -227,46 +255,57 @@ Follow steps 1-5 above to learn how to create a ulc.lua file.
 
 The concept of nesting Sirens into an Extra is critical to proper usage of ULC. Most of the features of ULC require sirens to be contained within extras.
 
-All you have to do to set this up is parent your Sirens to an Extra once they are compounded. Your extra can have any other parts also attached. I.E you 
+All you have to do to set this up is parent your Sirens to an Extra once they are compounded. Your extra can have any other parts also attached. I.E you
 could have a divider to block the emissives behind the emissives you want to show, such as in the case of a traffic advisor.
 
 <Callout>
-  ULC works best when extras don't have collisions. If you have a collision on your extra, ULC will not be able to turn it on or off consistently.
+  ULC works best when extras don't have collisions. If you have a collision on
+  your extra, ULC will not be able to turn it on or off consistently.
 </Callout>
 
 ## What to Read Next
+
 For detailed info about each feature and their config values see the below pages.
-<div className="nx-grid lg:nx-grid-cols-2 nx-grid-rows-2 nx-gap-4 nx-mt-4">
-  <PageCard 
-    name="Stage Controls"  link="/ulc/configuration/stage-controls"
-    description="Create buttons to control lighting stages."
-  />
-  <PageCard 
-    name="Default Stages"  link="/ulc/configuration/default-stages"
-    description="Automatically set lighting configuration when lights are activated."
-  />
-  <PageCard 
-    name="Cruise Lights"  link="/ulc/configuration/cruise-lights"
-    description="Configure smart cruise lights/steady burns that run all the time, or based on time of day."
-  />
-  <PageCard 
-    name="Park Patterns"  link="/ulc/configuration/park-patterns-sync"
-    description="Change lighting when the vehicle is stopped, and sync with other vehicles."
-  />
-  <PageCard 
-    name="Brake Extras" link="/ulc/configuration/brake-extras"
-    description="Setup brake extras that turn on when the vehicle is braking or stopped."
-  />
-  <PageCard 
-    name="Door Extras" link="/ulc/configuration/door-extras"
-    description="Show or hide extras when doors open and close."
+
+<div className='nx-grid lg:nx-grid-cols-2 nx-grid-rows-2 nx-gap-4 nx-mt-4'>
+  <PageCard
+    name='Stage Controls'
+    link='/ulc/configuration/stage-controls'
+    description='Create buttons to control lighting stages.'
   />
   <PageCard
-    name="Horn Extras" link="/ulc/configuration/horn-extras"
-    description="Enable an extra when the horn is pressed."
+    name='Default Stages'
+    link='/ulc/configuration/default-stages'
+    description='Automatically set lighting configuration when lights are activated.'
   />
-  <PageCard 
-    name="Reverse Extras" link="/ulc/configuration/reverse-extras"
-    description="Enable an extra while the vehicle is in reverse."
+  <PageCard
+    name='Cruise Lights'
+    link='/ulc/configuration/cruise-lights'
+    description='Configure smart cruise lights/steady burns that run all the time, or based on time of day.'
+  />
+  <PageCard
+    name='Park Patterns'
+    link='/ulc/configuration/park-patterns-sync'
+    description='Change lighting when the vehicle is stopped, and sync with other vehicles.'
+  />
+  <PageCard
+    name='Brake Extras'
+    link='/ulc/configuration/brake-extras'
+    description='Setup brake extras that turn on when the vehicle is braking or stopped.'
+  />
+  <PageCard
+    name='Door Extras'
+    link='/ulc/configuration/door-extras'
+    description='Show or hide extras when doors open and close.'
+  />
+  <PageCard
+    name='Horn Extras'
+    link='/ulc/configuration/horn-extras'
+    description='Enable an extra when the horn is pressed.'
+  />
+  <PageCard
+    name='Reverse Extras'
+    link='/ulc/configuration/reverse-extras'
+    description='Enable an extra while the vehicle is in reverse.'
   />
 </div>
