@@ -18,12 +18,15 @@ An alternative use is to add a faster or brighter pattern that will show only wh
 brakeConfig = {
     -- whether to use the brake effects
     useBrakes = true,
-    
+
     -- below this speed the effect is disabled
     -- at 3 or below, realistic brakes are enabled (extra will stay on when stopped)
     speedThreshold = 3,
 
-    -- extras to enable while braking
-    brakeExtras = {12}
+    -- extras to enable while brakes are on
+    brakeExtras = {}
+
+    -- extras to disable while brakes are on
+    disableExtras = {}
 },
 ```
