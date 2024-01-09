@@ -27,25 +27,16 @@ Siren deltas determine the rotation of the emissive mesh, and the environment li
 ```
 There are 8 commonly used delta values.
 
-| Direction   | Side      | Degrees | Delta       |
+| Direction   | Side      | Dummy Angle | Siren Delta |
 | ----------- | --------- | ------- | ----------- |
 | Front       | Front     | 0       | 0.00000000  |
 | Right       | Passenger | 90      | -1.57079633 |
 | Back        | Rear      | 180     | 3.14159265  |
 | Left        | Driver    | -90     | 1.57079633  |
-| Front Right | Passenger | -45     | -0.78539816 |
-| Back Right  | Passenger | -135    | -2.35619449 |
-| Back Left   | Driver    | 135     | 2.35619449  |
-| Front Left  | Driver    | 45      | 0.78539816  |
-
-{/* TODO add credit component */}
-Values originally found by Glitch Gamer on LCPDFR
-
-![](https://codahosted.io/docs/IEZ3CWmYBK/blobs/bl-7F9l4\_3ls4/4b5976cc8ed838dbf79a66e640e1ca82b9c85c5f254918fbd671f7a3c6e37d6a67a62cd4b65df69ee90dded72920d5a4f6f4fb32fd7580a2f6646da4a97e8d128f9ecc13d360849ef9f718fd025d108181debe018954bb28c04d53059dac3e154a0ede1b)
-
-<Callout type="info">
-  Notice that driver side is actually left, and passenger side is actually right
-</Callout>
+| Front Right | Passenger | 45     | -0.78539816 |
+| Back Right  | Passenger | 135    | -2.35619449 |
+| Back Left   | Driver    | -135     | 2.35619449  |
+| Front Left  | Driver    | -45      | 0.78539816  |
 
 Be sure to set the delta value in both the rotation section and the flashiness section as shown below.
 ```xml {4, 13} filename="carcols.meta"
