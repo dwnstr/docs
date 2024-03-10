@@ -121,7 +121,7 @@ offExtras = {6, 7}
 
 Default value: `false`
 
-Setting repair to `true` will make the vehicle repair itself whenever this stage is enabled. This effect is disabled while the vehicle is damaged, or when a door is open.\
+Setting repair to `true` will make the vehicle repair itself whenever this stage is enabled. This effect is disabled while the vehicle is damaged (so a broken vehicle won't automatically/randomly be repaired), or when a door is open (so doors don't snap shut).\
 \
 This is important for high poly extras, or extras with collisions. If you want to avoid this limitation, make sure to not include collisions in your lighting extras.
 
