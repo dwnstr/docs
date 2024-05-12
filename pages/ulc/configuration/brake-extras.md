@@ -29,7 +29,7 @@ When the value is 3, "realistic brake mode" will be enabled, which will cause th
 
 A table with all extras that should be enabled while the braking effect is activated.
 
-### ``disableExtras```
+### ``disableExtras``
 
 A table with all extras that should be disabled while the brakign effect is activated.
 
