@@ -1,18 +1,48 @@
 # Brake Extras
 
-Brake extras allow you to enable extras while the vehicle is braking. There is a speed threshold variable that will make the effect only activate at higher speeds if you prefer.3
+Brake extras allow you to enable and disable extras while the vehicle is braking. Pretty simple!
 
 ## How to Create Brake Patterns
 
-The primary use for this feature is adding functional brake lights as extras.
+The primary use for this feature is adding functional brake lights as extras. For this, you just need to create an extra with static emissives (not sirens) that will be enabled while braking.
 
-Create a stage as normal, and assign it in the config! Generally the usage for brake patterns is to create a faster pattern while braking to grab more attention.
-
-An alternative use is to add a faster or brighter pattern that will show only while the vehicle brakes at high speeds. To do this create a new stage as normal, and change `speedThreshold` to a higher value.
+Sometimes you may want to instead create an alternate pattern for your lightbar or other lighting features that will be enabled while braking. Generally the usage for brake patterns is to create a faster pattern while braking to grab more attention.
+You have the option of controlling what speed this effect will be enabled at. For example, you may want your alternative pattern to only be enabled if the vehicle brakes while at high speeds. You can configure this behavior by adjusting the `speedThreshold` value to a higher number.
 
 <!-- brake extras are not state aware -->
 
 ## Brake Pattern Vehicle Config
+
+### ``useBrakes``
+
+Whether the effect should be enabled.
+
+### ``speedThreshold``
+
+This value determines above what speed should the effect occur.
+
+For example, if ``speedThreshold`` is set to ``45``, the brake extras will only be enabled if the player starts braking while going above 45 miles per hour (or kph depending on your configuration).
+
+When the value is 3, "realistic brake mode" will be enabled, which will cause the brake lights to stay on while stopped. You can read more about this below.
+
+### ``brakeExtras``
+
+A table with all extras that should be enabled while the braking effect is activated.
+
+### ``disableExtras```
+
+A table with all extras that should be disabled while the brakign effect is activated.
+
+## Real Brake Light Behavior
+
+You can already get partially realistic brake light behavior by setting the ``speedThreshold`` value to 3, but this only effects your extras and has a somewhat limited realism.
+
+We recommend using the real-brake-lights script alongside ULC to get the best brake light behavior. The ``real-brake-lights`` script has it's own logic for realistically handling the brake lights on vehicles so that they stay on while stopped as well as other realistic automations.
+When ``real-brake-lights`` is detected in your resources by ULC, ULC will hand over control of the brake extras to the resource, allowing for more realistic behavior on not only the vehicle lights, but your extras.
+
+<!-- On it's own, the real-brake-lights resource only manages the actual brake lights on your vehicle. -->
+
+## ``ulc.lua`` Config Example
 
 ```lua
 brakeConfig = {
@@ -24,9 +54,9 @@ brakeConfig = {
     speedThreshold = 3,
 
     -- extras to enable while brakes are on
-    brakeExtras = {}
+    brakeExtras = {11, 12}
 
     -- extras to disable while brakes are on
-    disableExtras = {}
+    disableExtras = {9}
 },
 ```
