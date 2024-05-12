@@ -31,7 +31,7 @@ A table with all extras that should be enabled while the braking effect is activ
 
 ### ``disableExtras``
 
-A table with all extras that should be disabled while the brakign effect is activated.
+A table with all extras that should be disabled while the braking effect is activated.
 
 ## Real Brake Light Behavior
 
