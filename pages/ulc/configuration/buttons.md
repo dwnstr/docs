@@ -1,8 +1,8 @@
-# Stage Controls
+# Buttons
 
-## What are Stage Controls?
+## What are Buttons?
 
-Stage Controls, or "Buttons" as they are referenced in the code, are the bread and butter of ULC. They enable you to provide the player with key-bindings that will interact directly with vehicle lighting extras in real time.
+Buttons are the bread and butter of ULC. They enable you to provide the player with key-bindings that will interact directly with vehicle lighting extras in real time.
 
 Only the stage buttons you define will appear on screen, if none are defined the ULC ui will be hidden.
 
@@ -67,10 +67,10 @@ color = 'green'
 
 Possible values:
 
-* 'green'
-* 'blue'
-* 'red'
-* 'amber'
+- 'green'
+- 'blue'
+- 'red'
+- 'amber'
 
 #### extra
 
@@ -104,8 +104,6 @@ oppositeExtras = {5}
 Whenever the stage is enabled extra 5 will turn off.&#x20;
 
 Whenever the stage is disabled extra 5 will turn on.
-
-
 
 #### offExtras
 
@@ -150,8 +148,6 @@ repair = false
 
 ## Full Setup Example
 
-
-
 Example:&#x20;
 
 ```lua
@@ -164,12 +160,10 @@ buttons = {
 }
 ```
 
-
-
 ## Tips & Tricks
 
-* Any stages you create can also be used by any other feature of the resource. For example, if you create a stage extra that has an alternate pattern, you can then use that pattern as your brake pattern.
-* Stages are fully state aware, meaning if your alt pattern was enabled before you started braking, it will remain on after you finish braking. The same logic applies other features, except park patterns.
-* Each vehicle can have a maximum of 9. If none are configured for the vehicle, the UI will not show at all. Only buttons that are configured will appear on the UI.
-* No two buttons can share the same primary extra.
-* Keys don't have to be listed in order or sequentially. You could use 5, 3, 1, 7, 2 if you wanted. However, they will render on the UI in ascending order left to right.
+- Any stages you create can also be used by any other feature of the resource. For example, if you create a stage extra that has an alternate pattern, you can then use that pattern as your brake pattern.
+- Stages are fully state aware, meaning if your alt pattern was enabled before you started braking, it will remain on after you finish braking. The same logic applies other features, except park patterns.
+- Each vehicle can have a maximum of 9. If none are configured for the vehicle, the UI will not show at all. Only buttons that are configured will appear on the UI.
+- No two buttons can share the same primary extra.
+- Keys don't have to be listed in order or sequentially. You could use 5, 3, 1, 7, 2 if you wanted. However, they will render on the UI in ascending order left to right.

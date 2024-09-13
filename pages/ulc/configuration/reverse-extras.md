@@ -15,6 +15,7 @@ If you want the reverse lights to have environment lighting, you should could ma
 ```lua
 reverseConfig = {
     useReverse = true,
-    reverseExtras = {12}
+    reverseExtras = {12},
+    disableExtras = {11}
 },
 ```
