@@ -1,4 +1,16 @@
+import Image from "next/image";
+
 # Real Brake Lights
+
+<div className="nx-aspect-[4/1] nx-w-full nx-rounded-lg nx-overflow-hidden nx-flex nx-justify-center nx-items-center nx-my-4">
+  <Image
+    src="/rbl.jpg"
+    alt="Banner"
+    width="1000"
+    height="300"
+    className="nx-object-cover"
+  />
+</div>
 
 ## Overview
 
@@ -13,8 +25,11 @@ shifting the vehicle into park.
 ## ULC Integration
 
 ULC is able to hook into Real Brake Lights, and uses it's brake logic to determine when to activate
-the [brake extras]("/ulc/configuration/brake-extras") feature. This means that all of the benefits of Real Brake Lights are available
+the [brake extras](/ulc/configuration/brake-extras) feature. This means that all of the benefits of Real Brake Lights are available
 to ULC users.
+
+Real Brake Lights also listens for ULC [/blackout command](/ulc/in-game-usage) events and will keep the brakelights disabled while
+blackout is active.
 
 ## How to setup
 
