@@ -1,0 +1,126 @@
+---
+description:
+  Documentation for default stages, which allow you to set certain stages on or
+  off when lights are activated.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Default Stages
+
+## Overview
+
+Default stages allows you to specify [buttons](buttons.mdx) or [stages](stages.mdx) that will either be enabled or disabled when the lighting is activated on the vehicle.
+
+## Example Usage
+
+### Example 1
+
+You want to have the vehicle always be in Stage 1 of 3 when the lights are activated. You would create a button called "Stage 1".
+
+```lua
+{
+  label = "Stage 1",
+  key = 1,
+  extra = 1,
+  linkedExtras = {2, 3},
+  oppositeExtras = {},
+  offExtras = {}
+}
+```
+
+add it as a stage in the `stages` section of `ulc.lua`,
+
+```lua
+stages = {
+  useStages = true,
+  stagesKeys = {1, 2, 3}
+}
+```
+
+and then add the key to `enableKeys` in the `defaultStages` section.
+
+```lua
+defaultStages = {
+  useDefaults = false,
+  enableKeys = {1},
+  disableKeys = {}
+}
+```
+
+Now, whenever the lights are activated, the vehicle will always be in Stage 1.
+
+### Example 2
+
+Say I have a button to activate front lighting on my vehicle:
+
+```lua
+{
+  label = "FRONT",
+  key = 1,
+  extra = 2,
+  linkedExtras = {4},
+  oppositeExtras = {},
+  offExtras = {}
+}
+```
+
+I want my front lighting to always be enabled when the lights are activated. I will add this stage to the default stages by adding the key, 1, to `enableKeys`:
+
+```lua
+defaultStages = {
+  useDefaults = false,
+  enableKeys = {1},
+  disableKeys = {}
+}
+```
+
+Now it will be as if the player pressed `NUM1` to activate the stage every time the lights turn on resulting in the stage always being active when lights are first activated.
+
+## Conflicts
+
+Keys are processed in the order they are listed in `enableKeys` and `disableKeys`. If 2 buttons are specified in `defaultStages` that reference the same extra as `linkedExtras`, `oppositeExtras`, or `offExtras`, the later key will override the earlier ones.
+If more than one stage is specified in `defaultStages`, the last key pressed will determine the stage the vehicle is in when lights are activated.
+
+Following the above example, if we had our "FRONT" lighting stage which references Extra 4 as a linkedExtra as well as another stage called "TA" which references Extra 4 as an offExtra, we will run into a conflict.
+
+```lua
+{
+  label = "FRONT",
+  key = 1,
+  extra = 2,
+  linkedExtras = {4},
+  oppositeExtras = {},
+  offExtras = {}
+},
+{
+  label = "TA",
+  key = 2,
+  extra = 3,
+  linkedExtras = {},
+  oppositeExtras = {},
+  offExtras = {4}
+}
+```
+
+Later keys trigger after earlier ones, so if we listed "FRONT" as a defaultStage and then "TA", the result would be that extra 4 is off.
+
+```lua
+defaultStages = {
+  useDefaults = false,
+  enableKeys = {1, 2},
+  disableKeys = {}
+}
+```
+
+If we swap the order, the result would be that extra 4 is on.
+
+```lua
+defaultStages = {
+  useDefaults = false,
+  enableKeys = {2, 1},
+  disableKeys = {}
+}
+```
+
+Keep this in mind when using Default Stages!

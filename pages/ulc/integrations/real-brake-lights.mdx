@@ -1,0 +1,37 @@
+import Image from "next/image";
+
+# Real Brake Lights
+
+<div className="nx-aspect-[4/1] nx-w-full nx-rounded-lg nx-overflow-hidden nx-flex nx-justify-center nx-items-center nx-my-4">
+  <Image
+    src="/rbl.jpg"
+    alt="Banner"
+    width="1000"
+    height="300"
+    className="nx-object-cover"
+  />
+</div>
+
+## Overview
+
+[Real Brake Lights](https://github.com/Flohhhhh/real-brake-lights) is a simple script that enables brake
+lights while stopped on player vehicles. (By default in GTA V, brake lights only turn on while braking,
+not once the vehicle has come to a complete stop.)
+
+Real brake lights also features some smart logic to make the effect more realistic including
+a timer to turn off the brake lights after being stopped for some time to simulate the driver
+shifting the vehicle into park.
+
+## ULC Integration
+
+ULC is able to hook into Real Brake Lights, and uses it's brake logic to determine when to activate
+the [brake extras](/ulc/configuration/brake-extras) feature. This means that all of the benefits of Real Brake Lights are available
+to ULC users.
+
+Real Brake Lights also listens for ULC [/blackout command](/ulc/in-game-usage#commands) events and will keep the brakelights disabled while
+blackout is active.
+
+## How to setup
+
+All you need to do is have both resources running on your server. ULC will automatically detect
+Real Brake Lights and listen for the brake light state changes.

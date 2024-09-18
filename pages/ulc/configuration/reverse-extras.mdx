@@ -1,0 +1,41 @@
+# Reverse Extras
+
+Reverse extras will turn on while vehicle is in reverse.
+
+The intended use for this is adding reverse lights to the lightbar.
+
+## How to Create Reverse Extras
+
+To create reverse extras, simply create new emissive meshes to use, and parent them to an extra. Then add that extra to the reverse extras in the \`\`ulc.lua\`\`.\
+
+If you want the reverse lights to have environment lighting, you should could make them a siren.
+
+## Example ulc.lua
+
+```lua
+reverseConfig = {
+    useReverse = true,
+    reverseExtras = {12},
+    disableExtras = {11}
+},
+```
+
+## Reverse Timer
+
+To achieve a more realistic result, the reverse feature has a built in timer that will disable the reverse extras after the vehicle
+has not moved for a certain amount of time. This is to simulate the driver shifting out of reverse.
+
+This timer has a randomness factor so it will turn off between 3 and 8 seconds after the vehicle stops moving.
+
+This effect can be disabled to keep the reverse extras on until the player drives forward again by setting `useRandomExpiration` to false in the `config.lua`.
+You can also adjust the minimum and maximum time by changing the `minExpiration` and `maxExpiration` values in the `config.lua`.
+
+```lua
+ReverseSettings = {
+    useRandomExpiration = true,
+    -- minumum time in seconds extras will stay on after vehicle stops moving
+    minExpiration = 3,
+    -- maximum time in seconds extras will stay on after vehicle stops moving
+    maxExpiration = 8
+},
+```

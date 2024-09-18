@@ -1,0 +1,57 @@
+---
+title: ULC Stages
+description: How to use stages in ULC
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Stages
+
+## What are "Stages"?
+
+Stages in ULC are simply a way to change the behavior of buttons to make them behave as a user would expect
+cyclical/sequential stages (where the next stage includes the last one) to work. This allows stages to properly "build" on each other.
+The only difference between a button defined as a stage and a standard button is that a stage will maintain awareness of other stages
+and adjust it's on-off state accordingly.
+
+Consider the example below:
+
+```lua
+buttons = {
+  {label = "Stage 1", key = 1, color = "green", extra = 1, linkedExtras = {}, offExtras = {2,3}},
+  {label = "Stage 2", key = 2, color = "green", extra = 2, linkedExtras = {1}, offExtras = {3}},
+  {label = "Stage 3", key = 3, color = "green", extra = 3, linkedExtras = {1,2}, offExtras = {}}
+},
+```
+
+With this setup, the linked and off extras are almost enough to make a proper stage system. Pressing the stage 3 button would enable both 1 and 2, however, if you were to
+press 3 then press 2 to downgrade to stage 2, it would actually turn off all three stages since
+stage 2 was already enabled.
+
+The default behavior of buttons is to disable if it's already enabled. If a button is defined as a stage it will instead check the current stage
+and if it's a different stage the button will instead remain active and the extras would be set accordingly. Only if the stage is the same as the
+current stage will all of the stages be disabled.
+
+<Callout type="info">
+  Defining only one button as a stage will have no effect!
+</Callout>
+
+## How to use Stages
+
+Stages are defined in the "stages" section of the `ulc.lua` configuration file. Simply add any buttons you want to behave as stages to the `stageKeys` table by their key.
+
+```lua
+stages = {
+  useStages = true,
+  stagesKeys = {1, 2, 3}
+}
+```
+
+<Callout>
+  Make sure youre putting the button's KEY here and not the EXTRA!
+
+For example, if your have a button like the one below the value you should place in `stageKeys` is 4 (not the extra number which is 12).
+
+`{ label = "Stage 1", key = 4, extra = 12 ... }`
+
+</Callout>
