@@ -42,7 +42,7 @@ and then add the key to `enableKeys` in the `defaultStages` section.
 
 ```lua
 defaultStages = {
-  useDefaults = false,
+  useDefaults = true,
   enableKeys = {1},
   disableKeys = {}
 }
@@ -69,7 +69,7 @@ I want my front lighting to always be enabled when the lights are activated. I w
 
 ```lua
 defaultStages = {
-  useDefaults = false,
+  useDefaults = true,
   enableKeys = {1},
   disableKeys = {}
 }
@@ -107,7 +107,7 @@ Later keys trigger after earlier ones, so if we listed "FRONT" as a defaultStage
 
 ```lua
 defaultStages = {
-  useDefaults = false,
+  useDefaults = true,
   enableKeys = {1, 2},
   disableKeys = {}
 }
@@ -117,7 +117,7 @@ If we swap the order, the result would be that extra 4 is on.
 
 ```lua
 defaultStages = {
-  useDefaults = false,
+  useDefaults = true,
   enableKeys = {2, 1},
   disableKeys = {}
 }
