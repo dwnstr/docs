@@ -7,5 +7,10 @@
     "title": "Download ULC ↗",
     "href": "https://github.com/Flohhhhh/ultimate-lighting-controller/releases",
     "newWindow": true
+  },
+  "find_vehicles": {
+    "title": "Find Vehicles ↗",
+    "href": "https://fiveboard.io/ulc",
+    "newWindow": true
   }
 }
