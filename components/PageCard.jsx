@@ -7,12 +7,20 @@ const PageCard = (props) => {
   const router = useRouter()
 
   const { name, link, description } = props
+  const isExternal = /^https?:\/\//.test(link)
   console.log(name)
 
   return (
     <button 
       className="nx-w-full nx-h-32 nx-flex nx-gap-4 nx-justify-between nx-p-4 nx-bg-blue-500/10 nx-border nx-border-blue-500/30 nx-rounded-lg nx-transition hover:nx-opacity-70"
-      onClick={() => router.push(link)}
+      onClick={() => {
+        if (isExternal) {
+          window.open(link, '_blank', 'noopener,noreferrer')
+          return
+        }
+
+        router.push(link)
+      }}
     >
 
       {/* page name */}
