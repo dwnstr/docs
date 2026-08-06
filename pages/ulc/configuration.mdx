@@ -75,6 +75,13 @@ features.
       -- delay between checks, this can be very long, it will only make it more realistic
       delay = 10,
   },
+
+  -- Global horn timing defaults, in milliseconds.
+  -- Vehicles can override either value in their hornConfig.
+  HornSettings = {
+      hornPressDelay = 0,
+      hornReleaseDelay = 0,
+  },
   ...
 ```
 

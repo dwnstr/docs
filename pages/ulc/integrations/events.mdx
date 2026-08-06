@@ -1,0 +1,132 @@
+---
+title: ULC Events
+description: Use ULC events from other FiveM resources.
+---
+
+# ULC Events
+
+ULC provides client events that other FiveM resources can use to control
+configured vehicle extras or react to lighting state changes.
+
+These events are client-side. Call them with `TriggerEvent` and listen for them
+with `AddEventHandler`. Do not use `TriggerServerEvent` for the events on this
+page.
+
+## Set an extra or stage
+
+Use `ulc:SetStage` to enable, disable, or toggle an extra on the vehicle that
+the local player is currently using with ULC.
+
+```lua
+TriggerEvent(
+    "ulc:SetStage",
+    extra,
+    action,
+    playSound,
+    extraOnly,
+    repair,
+    forceChange,
+    forceUi
+)
+```
+
+### Arguments
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| `extra` | number | The vehicle extra ID to control. |
+| `action` | number | `0` enables, `1` disables, and `2` toggles the extra. |
+| `playSound` | boolean | Plays ULC's enable or disable beep when the extra belongs to a configured button. |
+| `extraOnly` | boolean | When `true`, changes only this extra. When `false`, ULC also processes its configured linked, opposite, and off extras. |
+| `repair` | boolean | Uses ULC's repair behavior while changing the extra. The change is rejected if the vehicle is damaged or a door is open. Usually `false`. |
+| `forceChange` | boolean | Processes the action even if the extra is already in the requested state. This is useful when linked or off extras must still be processed. Usually `false`. |
+| `forceUi` | boolean | Forces the configured ULC button display to update when `extraOnly` is `true`. Usually `false`. |
+
+The player must be inside a vehicle recognized by ULC. If `extra` belongs to a
+configured ULC button, using `extraOnly = false` preserves that button's normal
+stage and linked-extra behavior.
+
+### Examples
+
+Enable extra 12 and process its configured linked, opposite, and off extras:
+
+```lua
+TriggerEvent("ulc:SetStage", 12, 0, true, false, false, false, false)
+```
+
+Disable only extra 12 without playing a sound:
+
+```lua
+TriggerEvent("ulc:SetStage", 12, 1, false, true, false, false, false)
+```
+
+Toggle extra 12 and update its ULC button:
+
+```lua
+TriggerEvent("ulc:SetStage", 12, 2, true, false, false, false, true)
+```
+
+## Listen for ULC state changes
+
+External client resources can listen for the following events. These events
+are notifications from ULC; use them to react to state changes rather than to
+control those states.
+
+### Emergency lights
+
+`ulc:lightsOn` is emitted when the local vehicle's emergency lights turn on.
+`ulc:lightsOff` is emitted when they turn off. Neither event has arguments.
+
+```lua
+AddEventHandler("ulc:lightsOn", function()
+    print("Emergency lights turned on")
+end)
+
+AddEventHandler("ulc:lightsOff", function()
+    print("Emergency lights turned off")
+end)
+```
+
+### Park and drive states
+
+`ulc:vehPark` is emitted when ULC changes to its parked-lighting state.
+`ulc:vehDrive` is emitted when ULC changes back to its driving-lighting state.
+Neither event has arguments.
+
+```lua
+AddEventHandler("ulc:vehPark", function()
+    print("ULC entered the parked state")
+end)
+
+AddEventHandler("ulc:vehDrive", function()
+    print("ULC entered the driving state")
+end)
+```
+
+### Turn indicators
+
+`ulc:indicatorStateChanged` is emitted when the local vehicle's turn-indicator
+state changes.
+
+```lua
+AddEventHandler("ulc:indicatorStateChanged", function(newState, oldState)
+    print(("Indicator state changed from %s to %s"):format(oldState, newState))
+end)
+```
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| `newState` | number | The current indicator state: `0` off, `1` left, `2` right, or `3` hazards. |
+| `oldState` | number | The indicator state before the change, using the same values. |
+
+The state-change events describe the local player's current vehicle. If an
+integration needs a vehicle handle, it can retrieve it when the event runs:
+
+```lua
+AddEventHandler("ulc:lightsOn", function()
+    local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
+    if vehicle == 0 then return end
+
+    -- Use the vehicle in your integration.
+end)
+```

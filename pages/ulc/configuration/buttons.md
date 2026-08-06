@@ -80,6 +80,31 @@ The extra field specifies the primary extra for the button. This extra will alwa
 extra = 8,
 ```
 
+#### requiredExtras
+
+`requiredExtras` is an optional table of extras that must all be enabled before
+the button appears in the ULC HUD and its numpad keybind is available. Use it
+to hide controls that only apply to a vehicle variant, such as a lightbar button
+on a slick-top vehicle.
+
+It is also useful when extras change a lightbar pattern but the lightbar itself
+is an extra. If the lightbar is disabled, the buttons that control its patterns
+will be hidden.
+
+```lua
+-- This button controls extra 8, but is only available while extra 10 is enabled.
+extra = 8,
+requiredExtras = {10},
+```
+
+ULC checks these requirements when the vehicle is entered and again within one
+second after an external resource changes a listed extra. When a requirement is
+not met, the button is hidden rather than disabled.
+
+To prevent flashing and other issues, required extras must not be controlled by
+ULC. For example, if extra 1 is your Stage 1 lights, it cannot be the required
+extra for Stage 2.
+
 #### linkedExtras
 
 Linked extras specifies extras that will match the state of the main extra when the key is pressed. Consider the example below:
